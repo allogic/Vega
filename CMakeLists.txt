@@ -14,4 +14,4 @@ set(SANDBOX_DIR ${VEGA_DIR}/sandbox)
 add_subdirectory(${ENGINE_DIR})
 
 # Sandbox
-#add_subdirectory(${SANDBOX_DIR})
+add_subdirectory(${SANDBOX_DIR})
