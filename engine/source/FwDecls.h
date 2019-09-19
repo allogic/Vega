@@ -2,9 +2,10 @@
 #define FWDECLS_H
 
 namespace vega {
-  static glm::fvec2 cursor, scroll;
-
   class Timestep;
+  class Input;
+  class Event;
+  class Layer;
   class Application;
   class Shader;
   class Camera;

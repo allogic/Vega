@@ -2,7 +2,7 @@ set(SOURCE_DIR ${ENGINE_DIR}/source)
 set(VENDOR_DIR ${ENGINE_DIR}/vendor)
 
 # Engine
-add_library(engine ${ENGINE_DIR}/engine.h)
+add_library(engine ${ENGINE_DIR}/Engine.h)
 
 target_include_directories(engine PUBLIC ${SOURCE_DIR})
 

@@ -21,18 +21,22 @@
 #include <string>
 #include <stdexcept>
 #include <functional>
-#include <vector>
+#include <utility>
 
-#include "fwdecls.h"
-#include "singleton.h"
-#include "timestep.h"
-#include "application.h"
-#include "entrypoint.h"
-#include "shader.h"
-#include "camera.h"
-#include "vertex.h"
-#include "mesh.h"
-#include "transform.h"
-#include "model.h"
+#include "FwDecls.h"
+#include "Core.h"
+#include "Singleton.h"
+#include "Timestep.h"
+#include "Layer.h"
+#include "Event.h"
+#include "Input.h"
+#include "Application.h"
+#include "EntryPoint.h"
+#include "Shader.h"
+#include "Camera.h"
+#include "Vertex.h"
+#include "Mesh.h"
+#include "Transform.h"
+#include "Model.h"
 
 #endif

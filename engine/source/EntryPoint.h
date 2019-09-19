@@ -1,10 +1,12 @@
 #ifndef ENTRYPOINT_H
 #define ENTRYPOINT_H
 
-int main(int argc, char **argv) {
-  vega::Application *application = vega::make();
+extern vega::Application *Make();
 
-  application->run();
+int main(int argc, char **argv) {
+  vega::Application *application = vega::Make();
+
+  application->Run();
 
   delete application;
 }

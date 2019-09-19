@@ -2,7 +2,7 @@
 #define MODEL_H
 
 namespace vega {
-  static Mesh convert(const aiMesh *mesh, const aiScene *scene) {
+  static Mesh Convert(const aiMesh *mesh, const aiScene *scene) {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
 
@@ -17,7 +17,7 @@ namespace vega {
     return Mesh{vertices, indices};
   }
 
-  class Model {
+  class VEGA_API Model {
   public:
     explicit Model(const std::string &file) {
       Assimp::Importer importer;
@@ -30,15 +30,15 @@ namespace vega {
         throw std::runtime_error("can not load model");
 
       for (unsigned int i = 0; i < scene->mNumMeshes; i++)
-        _meshes.emplace_back(convert(scene->mMeshes[i], scene));
+        mMeshes.emplace_back(Convert(scene->mMeshes[i], scene));
     }
 
-    inline void bind() const {
-      for (const auto mesh : _meshes) mesh.bind();
+    inline void Bind() const {
+      for (const auto mesh : mMeshes) mesh.Bind();
     }
 
   private:
-    std::vector<Mesh> _meshes;
+    std::vector<Mesh> mMeshes;
   };
 }
 

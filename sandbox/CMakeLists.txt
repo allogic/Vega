@@ -1,7 +1,7 @@
 set(SOURCE_DIR ${SANDBOX_DIR}/source)
 
 # Sandbox
-add_executable(sandbox ${SANDBOX_DIR}/sandbox.cpp)
+add_executable(sandbox ${SANDBOX_DIR}/Sandbox.cpp)
 
 target_include_directories(sandbox PUBLIC ${ENGINE_DIR})
 target_include_directories(sandbox PUBLIC ${SOURCE_DIR})

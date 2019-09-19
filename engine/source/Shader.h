@@ -2,7 +2,7 @@
 #define SHADER_H
 
 namespace vega {
-  static void compile(unsigned int sid, const std::string &source, bool debug) {
+  static void Compile(unsigned int sid, const std::string &source, bool debug) {
     const char *ptr = source.c_str();
 
     glShaderSource(sid, 1, &ptr, nullptr);
@@ -24,45 +24,45 @@ namespace vega {
     }
   }
 
-  class Shader {
+  class VEGA_API Shader final {
   public:
-    explicit Shader(const std::string &vertex_source, const std::string &fragment_source, bool debug = false) :
-        _pid(glCreateProgram()) {
+    explicit Shader(const std::string &vertexSource, const std::string &fragmentSource, bool debug = false) :
+        mPid(glCreateProgram()) {
       unsigned int vid = glCreateShader(GL_VERTEX_SHADER);
       unsigned int fid = glCreateShader(GL_FRAGMENT_SHADER);
 
-      compile(vid, vertex_source, debug);
-      compile(fid, fragment_source, debug);
+      Compile(vid, vertexSource, debug);
+      Compile(fid, fragmentSource, debug);
 
-      glAttachShader(_pid, vid);
-      glAttachShader(_pid, fid);
+      glAttachShader(mPid, vid);
+      glAttachShader(mPid, fid);
 
-      glLinkProgram(_pid);
+      glLinkProgram(mPid);
 
-      glDetachShader(_pid, vid);
-      glDetachShader(_pid, fid);
+      glDetachShader(mPid, vid);
+      glDetachShader(mPid, fid);
 
-      glDeleteShader(_pid);
+      glDeleteShader(vid);
       glDeleteShader(fid);
     };
 
     virtual ~Shader() {
-      glDeleteProgram(_pid);
+      glDeleteProgram(mPid);
     }
 
-    inline void bind() const {
-      glUseProgram(_pid);
+    inline void Bind() const {
+      glUseProgram(mPid);
     }
 
-    inline void fmat4(const std::string &name, const glm::fmat4 &matrix) const {
-      glUniformMatrix4fv(glGetUniformLocation(_pid, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
-    }
+    /*inline void fmat4(const std::string &name, const glm::fmat4 &matrix) const {
+      glUniformMatrix4fv(glGetUniformLocation(mPid, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
+    }*/
 
   private:
-    unsigned int _pid;
+    unsigned int mPid;
   };
 
-  namespace shader {
+  /*namespace shader {
     class DebugShader final : public Shader {
     public:
       DebugShader() : Shader(R"vertex(
@@ -97,7 +97,7 @@ void main() {
 }
       )fragment") {}
     };
-  }
+  }*/
 }
 
 #endif
