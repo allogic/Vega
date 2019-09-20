@@ -1,6 +1,6 @@
 # Vega
 
-Lightweight GNU/Linux based OpenGL graphics template middleware for games and data visualization. It aims to provide the thinnest and simplest stack of technology for prototyping directly from c++. 
+Lightweight OpenGL graphics template middleware for games and data visualization. It aims to provide the thinnest and simplest stack of technology for prototyping directly from c++. 
 
 As a collection of game programming building blocks, vega aims to foster an ecosystem of simple minimal reusable components suited for building your own games.
 
