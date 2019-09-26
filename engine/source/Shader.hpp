@@ -1,7 +1,7 @@
-#ifndef SHADER_H
-#define SHADER_H
+#ifndef VEGA_SHADER_HPP
+#define VEGA_SHADER_HPP
 
-namespace vega {
+namespace Vega {
   static void Compile(unsigned int sid, const std::string &source, bool debug) {
     const char *ptr = source.c_str();
 

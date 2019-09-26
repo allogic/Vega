@@ -1,8 +1,7 @@
-#ifndef FWDECLS_H
-#define FWDECLS_H
+#ifndef VEGA_FWDECLS_HPP
+#define VEGA_FWDECLS_HPP
 
-namespace vega {
-  class Timestep;
+namespace Vega {
   class Input;
   class Event;
   class Layer;

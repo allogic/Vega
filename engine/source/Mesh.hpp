@@ -1,7 +1,7 @@
-#ifndef MESH_H
-#define MESH_H
+#ifndef VEGA_MESH_HPP
+#define VEGA_MESH_HPP
 
-namespace vega {
+namespace Vega {
   class VEGA_API Mesh {
   public:
     explicit Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices) :
@@ -36,7 +36,10 @@ namespace vega {
 
   private:
     unsigned int mSize;
-    unsigned int mVao = 0, mVbo = 0, mEbo = 0;
+
+    unsigned int mVao = 0;
+    unsigned int mVbo = 0;
+    unsigned int mEbo = 0;
   };
 }
 
