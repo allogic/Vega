@@ -1,22 +1,21 @@
 set(SOURCE_DIR ${ENGINE_DIR}/source)
 set(VENDOR_DIR ${ENGINE_DIR}/vendor)
 
-# Engine
-add_library(engine ${ENGINE_DIR}/Engine.h)
+# GLM
+set(GLM_DIR ${VENDOR_DIR}/glm)
 
-target_include_directories(engine PUBLIC ${SOURCE_DIR})
+# IMGUI
+set(IMGUI_DIR ${VENDOR_DIR}/imgui)
 
-set_target_properties(engine PROPERTIES LINKER_LANGUAGE CXX)
+file(GLOB IMGUI_SOURCE
+        ${IMGUI_DIR}/*.cpp
+        ${IMGUI_DIR}/examples/imgui_impl_glfw.cpp
+        ${IMGUI_DIR}/examples/imgui_impl_opengl3.cpp)
 
 # GLAD
 set(GLAD_DIR ${VENDOR_DIR}/glad)
 
-add_library(glad ${GLAD_DIR}/gl/src/glad.c)
-
-target_include_directories(glad PRIVATE ${GLAD_DIR}/gl/include)
-target_include_directories(engine PUBLIC ${GLAD_DIR}/gl/include)
-
-target_link_libraries(engine glad ${CMAKE_DL_LIBS})
+file(GLOB GLAD_SOURCE ${GLAD_DIR}/gl/src/glad.c)
 
 # GLFW
 set(GLFW_DIR ${VENDOR_DIR}/glfw)
@@ -28,23 +27,21 @@ set(GLFW_INSTALL OFF CACHE INTERNAL "Generate GLFW installation target")
 
 add_subdirectory(${GLFW_DIR})
 
-target_include_directories(engine PUBLIC ${GLFW_DIR}/include)
-
-target_link_libraries(engine glfw ${GLFW_LIBRARIES})
-
-target_compile_definitions(engine PRIVATE GLFW_INCLUDE_NONE)
-
-# GLM
-set(GLM_DIR ${VENDOR_DIR}/glm)
-
-target_include_directories(engine PUBLIC ${GLM_DIR})
-
-# Assimp
+# ASSIMP
 set(ASSIMP_DIR ${VENDOR_DIR}/assimp)
 
-set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE INTERNAL "Build the ASSIMP tools")
-set(INJECT_DEBUG_POSTFIX OFF CACHE INTERNAL "Inject ASSIMP debug postfix")
-set(ASSIMP_BUILD_TESTS OFF CACHE INTERNAL "Build the ASSIMP tests")
-set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "Build the ASSIMP shared libraries")
+# ENGINE
+add_library(engine ${ENGINE_DIR}/Engine.hpp
+        ${IMGUI_SOURCE}
+        ${GLAD_SOURCE})
 
+target_include_directories(engine PUBLIC ${SOURCE_DIR})
+target_include_directories(engine PUBLIC ${GLM_DIR})
+target_include_directories(engine PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/examples)
+target_include_directories(engine PUBLIC ${GLAD_DIR}/gl/include)
+target_include_directories(engine PUBLIC ${GLFW_DIR})
 target_include_directories(engine PUBLIC ${ASSIMP_DIR}/include)
+
+target_compile_definitions(engine PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
+
+target_link_libraries(engine glfw)

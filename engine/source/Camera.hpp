@@ -1,7 +1,7 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#ifndef VEGA_CAMERA_HPP
+#define VEGA_CAMERA_HPP
 
-namespace vega {
+namespace Vega {
   class VEGA_API Camera {
   public:
     explicit Camera(const glm::fvec3 &position) : mPosition(position) {}
@@ -17,7 +17,8 @@ namespace vega {
   protected:
     glm::fvec3 mPosition;
 
-    glm::fvec3 mFront = {0.f, 0.f, 1.f}, mUp = {0.f, 1.f, 0.f};
+    glm::fvec3 mFront = {0.f, 0.f, 1.f};
+    glm::fvec3 mUp = {0.f, 1.f, 0.f};
   };
 }
 

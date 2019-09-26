@@ -1,7 +1,7 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef VEGA_MODEL_HPP
+#define VEGA_MODEL_HPP
 
-namespace vega {
+namespace Vega {
   static Mesh Convert(const aiMesh *mesh, const aiScene *scene) {
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;

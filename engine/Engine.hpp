@@ -1,5 +1,5 @@
-#ifndef VEGA_H
-#define VEGA_H
+#ifndef VEGA_ENGINE_HPP
+#define VEGA_ENGINE_HPP
 
 #include <glad/glad.h>
 
@@ -12,6 +12,10 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/string_cast.hpp>
 
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -23,20 +27,20 @@
 #include <functional>
 #include <utility>
 
-#include "FwDecls.h"
-#include "Core.h"
-#include "Singleton.h"
-#include "Timestep.h"
-#include "Layer.h"
-#include "Event.h"
-#include "Input.h"
-#include "Application.h"
-#include "EntryPoint.h"
-#include "Shader.h"
-#include "Camera.h"
-#include "Vertex.h"
-#include "Mesh.h"
-#include "Transform.h"
-#include "Model.h"
+#include "FwDecls.hpp"
+
+#include "Core.hpp"
+#include "Layer.hpp"
+#include "Event.hpp"
+#include "Application.hpp"
+#include "Input.hpp"
+#include "Shader.hpp"
+#include "Camera.hpp"
+#include "Vertex.hpp"
+#include "Mesh.hpp"
+#include "Transform.hpp"
+#include "Model.hpp"
+
+#include "EntryPoint.hpp"
 
 #endif

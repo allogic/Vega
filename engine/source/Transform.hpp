@@ -1,7 +1,7 @@
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
+#ifndef VEGA_TRANSFORM_HPP
+#define VEGA_TRANSFORM_HPP
 
-namespace vega {
+namespace Vega {
   class VEGA_API Transform {
   public:
     explicit Transform(
@@ -31,7 +31,9 @@ namespace vega {
     }
 
   private:
-    glm::fvec3 mPosition, mRotation, mScale;
+    glm::fvec3 mPosition;
+    glm::fvec3 mRotation;
+    glm::fvec3 mScale;
   };
 }
 

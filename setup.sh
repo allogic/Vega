@@ -16,6 +16,9 @@ cmake .
 # GLM
 git clone https://github.com/g-truc/glm $vendor/glm
 
+# IMGUI
+git clone https://github.com/ocornut/imgui $vendor/imgui
+
 # ASSIMP
 git clone https://github.com/assimp/assimp $vendor/assimp
 cd $vendor/assimp
