@@ -8,10 +8,10 @@ namespace Vega {
   public:
     explicit Vertex(const glm::fvec3 &position, const glm::fvec3 &normal) : mPosition(position), mNormal(normal) {}
 
-    [[nodiscard]] inline glm::fvec3 &Position() { return mPosition; }
-    [[nodiscard]] inline glm::fvec3 &Normal() { return mNormal; }
+    inline glm::fvec3 &Position() { return mPosition; }
+    inline glm::fvec3 &Normal() { return mNormal; }
 
-    [[nodiscard]] static inline std::size_t PositionStride() { return sizeof(Vertex) + sizeof(glm::fvec3); }
+    inline static std::size_t PositionStride() { return sizeof(Vertex) + sizeof(glm::fvec3); }
 
   private:
     glm::fvec3 mPosition;

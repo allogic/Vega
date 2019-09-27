@@ -5,7 +5,6 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
 
-#include <Vega/Window.hpp>
 #include <Vega/Layer.hpp>
 
 namespace Vega {
@@ -21,9 +20,9 @@ namespace Vega {
       ImGui::CreateContext();
       ImGui::StyleColorsDark();
 
-      //auto &window = Application::GetApplication();
+      auto window = &Vega::Application::GetApplication().GetWindow().GetNativeWindow();
 
-      ImGui_ImplGlfw_InitForOpenGL(nullptr, true);
+      ImGui_ImplGlfw_InitForOpenGL(window, true);
       ImGui_ImplOpenGL3_Init("#version 430");
     }
 

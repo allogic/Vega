@@ -7,9 +7,9 @@
 #include <Vega/Layer.hpp>
 #include <Vega/LayerStack.hpp>
 
-#include <Vega/ImGui/ImGuiLayer.hpp>
-
 namespace Vega {
+  class ImGuiLayer;
+
   class Application {
   public:
     explicit Application(const std::string &title = "Vega",
@@ -17,55 +17,19 @@ namespace Vega {
                          unsigned int height = 720,
                          unsigned int major = 4,
                          unsigned int minor = 3,
-                         unsigned int antialiasing = 0) {
-      assert(!sInstance && "Application already exists");
-      sInstance = this;
-
-      mWindow = new Window(title, width, height, major, minor, antialiasing);
-
-      //mImGuiLayer = new ImGuiLayer();
-      //PushLayer(mImGuiLayer);
-    }
+                         unsigned int antialiasing = 0);
 
     virtual ~Application() = default;
 
     inline void PushLayer(Layer *layer) { mLayerStack.Push(layer); }
     inline void PopLayer(Layer *layer) { mLayerStack.Pop(layer); }
 
-    [[nodiscard]] inline static Application &GetApplication() { return *sInstance; }
+    inline Window &GetWindow() { return *mWindow; }
 
-    [[nodiscard]] inline Window &GetWindow() { return *mWindow; }
+    void Run();
 
-    void Run() {
-      double lastUpdateTime = 0;
-      double lastFrameTime = 0;
-
-      while (!glfwWindowShouldClose(&mWindow->GetNativeWindow())) {
-        double now = glfwGetTime();
-        double deltaTime = now - lastUpdateTime;
-
-        glfwPollEvents();
-
-        for (auto layer : mLayerStack) layer->OnUpdate(deltaTime);
-
-        if ((now - lastFrameTime) >= mFPSLimit) {
-          glClearColor(0.f, 0.f, 0.f, 1.f);
-          glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-          for (auto layer : mLayerStack) layer->OnDraw();
-
-          //mImGuiLayer->Begin();
-          for (auto layer : mLayerStack) layer->OnImGui(deltaTime);
-          //mImGuiLayer->End();
-
-          glfwSwapBuffers(&mWindow->GetNativeWindow());
-
-          lastFrameTime = now;
-        }
-
-        lastUpdateTime = now;
-      }
-    }
+  public:
+    inline static Application &GetApplication() { return *sInstance; }
 
   private:
     unsigned int mMaxFPS = 60;
@@ -79,8 +43,10 @@ namespace Vega {
     LayerStack mLayerStack;
 
   private:
-    inline static Application *sInstance = nullptr;
+    static Application *sInstance;
   };
+
+  extern Application *Make();
 }
 
 #endif
