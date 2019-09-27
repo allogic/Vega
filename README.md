@@ -4,7 +4,7 @@ Lightweight OpenGL graphics template middleware for games and data visualization
 
 As a collection of game programming building blocks, vega aims to foster an ecosystem of simple minimal reusable components suited for building your own games.
 
-![Vega](logo.png)
+![Vega](Logo.png)
 
 Vega is under heavy development, not yet stable, fully documented or production ready.
 

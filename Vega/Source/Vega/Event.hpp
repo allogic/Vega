@@ -2,8 +2,8 @@
 #define VEGA_EVENT_HPP
 
 namespace Vega {
-  class VEGA_API Event final {
-  
+  class Event final {
+
   };
 }
 

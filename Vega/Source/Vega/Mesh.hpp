@@ -1,8 +1,14 @@
 #ifndef VEGA_MESH_HPP
 #define VEGA_MESH_HPP
 
+#include <glad/glad.h>
+
+#include <vector>
+
+#include <Vega/Vertex.hpp>
+
 namespace Vega {
-  class VEGA_API Mesh {
+  class Mesh final {
   public:
     explicit Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices) :
         mSize(indices.size()) {

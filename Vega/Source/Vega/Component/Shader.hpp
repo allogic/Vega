@@ -1,6 +1,13 @@
 #ifndef VEGA_SHADER_HPP
 #define VEGA_SHADER_HPP
 
+#include <glad/glad.h>
+
+#include <iostream>
+#include <string>
+
+#include <Vega/Core.hpp>
+
 namespace Vega {
   static void Compile(unsigned int sid, const std::string &source, bool debug) {
     const char *ptr = source.c_str();
@@ -24,7 +31,7 @@ namespace Vega {
     }
   }
 
-  class VEGA_API Shader final {
+  class VEGA_API Shader {
   public:
     explicit Shader(const std::string &vertexSource, const std::string &fragmentSource, bool debug = false) :
         mPid(glCreateProgram()) {
@@ -44,6 +51,8 @@ namespace Vega {
 
       glDeleteShader(vid);
       glDeleteShader(fid);
+
+      glUseProgram(0);
     };
 
     virtual ~Shader() {
@@ -54,50 +63,9 @@ namespace Vega {
       glUseProgram(mPid);
     }
 
-    /*inline void fmat4(const std::string &name, const glm::fmat4 &matrix) const {
-      glUniformMatrix4fv(glGetUniformLocation(mPid, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
-    }*/
-
   private:
     unsigned int mPid;
   };
-
-  /*namespace shader {
-    class DebugShader final : public Shader {
-    public:
-      DebugShader() : Shader(R"vertex(
-#version 430 core
-
-layout (location = 0) in vec3 l_position;
-layout (location = 1) in vec3 l_normal;
-
-out vec3 position;
-out vec3 normal;
-
-uniform mat4 projection;
-uniform mat4 view;
-uniform mat4 model;
-
-void main() {
-  position = vec3(model * vec4(l_position, 1.0));
-  normal = mat3(model) * l_normal;
-
-  gl_Position = projection * view * vec4(position, 1.0);
-}
-      )vertex", R"fragment(
-#version 430 core
-
-in vec3 position;
-in vec3 normal;
-
-out vec4 color;
-
-void main() {
-  color = vec4(normal, 1.0);
-}
-      )fragment") {}
-    };
-  }*/
 }
 
 #endif

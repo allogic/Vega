@@ -1,11 +1,11 @@
-set(SOURCE_DIR ${ENGINE_DIR}/source)
-set(VENDOR_DIR ${ENGINE_DIR}/vendor)
+set(SOURCE_DIR ${VEGA_DIR}/Source)
+set(VENDOR_DIR ${VEGA_DIR}/Vendor)
 
 # GLM
-set(GLM_DIR ${VENDOR_DIR}/glm)
+set(GLM_DIR ${VENDOR_DIR}/GLM)
 
 # IMGUI
-set(IMGUI_DIR ${VENDOR_DIR}/imgui)
+set(IMGUI_DIR ${VENDOR_DIR}/IMGUI)
 
 file(GLOB IMGUI_SOURCE
         ${IMGUI_DIR}/*.cpp
@@ -13,12 +13,12 @@ file(GLOB IMGUI_SOURCE
         ${IMGUI_DIR}/examples/imgui_impl_opengl3.cpp)
 
 # GLAD
-set(GLAD_DIR ${VENDOR_DIR}/glad)
+set(GLAD_DIR ${VENDOR_DIR}/GLAD)
 
 file(GLOB GLAD_SOURCE ${GLAD_DIR}/gl/src/glad.c)
 
 # GLFW
-set(GLFW_DIR ${VENDOR_DIR}/glfw)
+set(GLFW_DIR ${VENDOR_DIR}/GLFW)
 
 set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW examples")
 set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "Build the GLFW tests")
@@ -28,10 +28,10 @@ set(GLFW_INSTALL OFF CACHE INTERNAL "Generate GLFW installation target")
 add_subdirectory(${GLFW_DIR})
 
 # ASSIMP
-set(ASSIMP_DIR ${VENDOR_DIR}/assimp)
+set(ASSIMP_DIR ${VENDOR_DIR}/ASSIMP)
 
 # ENGINE
-add_library(engine ${ENGINE_DIR}/Engine.hpp
+add_library(engine ${SOURCE_DIR}/Engine.hpp
         ${IMGUI_SOURCE}
         ${GLAD_SOURCE})
 

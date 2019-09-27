@@ -2,15 +2,18 @@
 #define VEGA_LAYER_HPP
 
 namespace Vega {
-  class VEGA_API Layer {
+  class Layer {
   public:
     explicit Layer() = default;
 
     virtual ~Layer() = default;
 
-    virtual void OnUpdate(double dt) {}
+    virtual void OnAttach() {}
+    virtual void OnDetach() {}
+
+    virtual void OnUpdate(double deltaTime) {}
     virtual void OnDraw() {}
-    virtual void OnImgui(double dt) {}
+    virtual void OnImGui(double deltaTime) {}
   };
 }
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(vega)
+project(Vega)
 
 enable_language(CXX)
 
@@ -8,13 +8,13 @@ enable_language(CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CUDA_STANDARD 14)
 
-set(VEGA_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-set(ENGINE_DIR ${VEGA_DIR}/engine)
-set(SANDBOX_DIR ${VEGA_DIR}/sandbox)
+set(VEGA_DIR ${ROOT_DIR}/Vega)
+set(SANDBOX_DIR ${ROOT_DIR}/Sandbox)
 
 # ENGINE
-add_subdirectory(${ENGINE_DIR})
+add_subdirectory(${VEGA_DIR})
 
 # SANDBOX
 add_subdirectory(${SANDBOX_DIR})

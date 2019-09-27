@@ -1,6 +1,11 @@
 #ifndef VEGA_TRANSFORM_HPP
 #define VEGA_TRANSFORM_HPP
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#include <Vega/Core.hpp>
+
 namespace Vega {
   class VEGA_API Transform {
   public:

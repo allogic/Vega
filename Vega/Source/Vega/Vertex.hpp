@@ -1,8 +1,10 @@
 #ifndef VEGA_VERTEX_HPP
 #define VEGA_VERTEX_HPP
 
+#include <glm/glm.hpp>
+
 namespace Vega {
-  class VEGA_API Vertex final {
+  class Vertex final {
   public:
     explicit Vertex(const glm::fvec3 &position, const glm::fvec3 &normal) : mPosition(position), mNormal(normal) {}
 

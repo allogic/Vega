@@ -8,7 +8,7 @@ namespace Demo {
 
     ~CustomLayer() final = default;
 
-    void OnUpdate(double dt) override {
+    void OnUpdate(double deltaTime) override {
 
     }
 
@@ -16,8 +16,8 @@ namespace Demo {
 
     }
 
-    void OnImgui(double dt) override {
-      ImGui::Text("Demo");
+    void OnImGui(double deltaTime) override {
+      //ImGui::Text("Demo");
     }
   };
 }
