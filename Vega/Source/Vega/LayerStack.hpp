@@ -11,32 +11,13 @@ namespace Vega {
   public:
     LayerStack() = default;
 
-    virtual ~LayerStack() {
-      for (auto layer : mLayers) delete layer;
-    }
+    virtual ~LayerStack();
 
-    void Push(Layer *layer) {
-      mLayers.emplace(std::begin(mLayers) + mInsertIndex, layer);
+    void Push(Layer *layer);
+    void Pop(Layer *layer);
 
-      mInsertIndex++;
-
-      layer->OnAttach();
-    }
-
-    void Pop(Layer *layer) {
-      auto it = std::find(std::begin(mLayers), std::end(mLayers) + mInsertIndex, layer);
-
-      if (it != std::begin(mLayers) + mInsertIndex) {
-        layer->OnDetach();
-
-        mLayers.erase(it);
-
-        mInsertIndex--;
-      }
-    }
-
-    std::vector<Layer *>::iterator begin() { return std::begin(mLayers); }
-    std::vector<Layer *>::iterator end() { return std::end(mLayers); }
+    inline std::vector<Layer *>::iterator begin() { return std::begin(mLayers); }
+    inline std::vector<Layer *>::iterator end() { return std::end(mLayers); }
 
   private:
     std::vector<Layer *> mLayers;

@@ -8,12 +8,12 @@ namespace Vega {
 
     virtual ~Layer() = default;
 
-    virtual void OnAttach() {}
-    virtual void OnDetach() {}
+    virtual void OnAttach();
+    virtual void OnDetach();
 
-    virtual void OnUpdate(double deltaTime) {}
-    virtual void OnDraw() {}
-    virtual void OnImGui(double deltaTime) {}
+    virtual void OnUpdate(double deltaTime);
+    virtual void OnDraw();
+    virtual void OnImGui(double deltaTime);
   };
 }
 

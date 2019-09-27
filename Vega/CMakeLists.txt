@@ -30,18 +30,23 @@ add_subdirectory(${GLFW_DIR})
 # ASSIMP
 set(ASSIMP_DIR ${VENDOR_DIR}/ASSIMP)
 
-# ENGINE
-add_library(engine ${SOURCE_DIR}/Engine.hpp
+# VEGA
+file(GLOB_RECURSE VEGA_HEADER ${SOURCE_DIR}/*.hpp)
+file(GLOB_RECURSE VEGA_SOURCE ${SOURCE_DIR}/*.cpp)
+
+add_library(vega ${SOURCE_DIR}/Vega.hpp
+        ${VEGA_HEADER}
+        ${VEGA_SOURCE}
         ${IMGUI_SOURCE}
         ${GLAD_SOURCE})
 
-target_include_directories(engine PUBLIC ${SOURCE_DIR})
-target_include_directories(engine PUBLIC ${GLM_DIR})
-target_include_directories(engine PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/examples)
-target_include_directories(engine PUBLIC ${GLAD_DIR}/gl/include)
-target_include_directories(engine PUBLIC ${GLFW_DIR})
-target_include_directories(engine PUBLIC ${ASSIMP_DIR}/include)
+target_include_directories(vega PUBLIC ${SOURCE_DIR})
+target_include_directories(vega PUBLIC ${GLM_DIR})
+target_include_directories(vega PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/examples)
+target_include_directories(vega PUBLIC ${GLAD_DIR}/gl/include)
+target_include_directories(vega PUBLIC ${GLFW_DIR})
+target_include_directories(vega PUBLIC ${ASSIMP_DIR}/include)
 
-target_compile_definitions(engine PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
+target_compile_definitions(vega PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
 
-target_link_libraries(engine glfw)
+target_link_libraries(vega glfw)

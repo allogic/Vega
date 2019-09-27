@@ -1,6 +1,8 @@
 #include <Vega.hpp>
 
-#include "Sandbox/DemoLayer.hpp"
+#include <Vega/Application.hpp>
+
+#include <Sandbox/DemoLayer.hpp>
 
 namespace Demo {
   class Sandbox final : public Vega::Application {

@@ -1,9 +1,14 @@
 set(SOURCE_DIR ${SANDBOX_DIR}/Source)
 
 # SANDBOX
-add_executable(sandbox ${SOURCE_DIR}/Sandbox.cpp)
+file(GLOB_RECURSE SANDBOX_HEADER ${SOURCE_DIR}/*.hpp)
+file(GLOB_RECURSE SANDBOX_SOURCE ${SOURCE_DIR}/*.cpp)
+
+add_executable(sandbox ${SOURCE_DIR}/Sandbox.cpp
+        ${SANDBOX_HEADER}
+        ${SANDBOX_SOURCE})
 
 target_include_directories(sandbox PUBLIC ${SOURCE_DIR})
-target_include_directories(sandbox PUBLIC ${ENGINE_DIR})
+target_include_directories(sandbox PUBLIC ${VEGA_DIR})
 
-target_link_libraries(sandbox engine)
+target_link_libraries(sandbox vega)

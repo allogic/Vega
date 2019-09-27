@@ -3,7 +3,10 @@
 
 namespace Vega {
   class Event final {
+  public:
+    explicit Event() = default;
 
+    virtual ~Event() = default;
   };
 }
 
