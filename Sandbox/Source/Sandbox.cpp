@@ -1,12 +1,12 @@
-#include <Engine.hpp>
+#include <Vega.hpp>
 
-#include "DemoLayer.hpp"
+#include "Sandbox/DemoLayer.hpp"
 
 namespace Demo {
   class Sandbox final : public Vega::Application {
   public:
-    Sandbox() : Application(800, 800, "Vega", "430", 4, 3, 16) {
-      PushLayer(new Demo::CustomLayer());
+    Sandbox() : Application() {
+      PushLayer(new CustomLayer());
     }
   };
 }

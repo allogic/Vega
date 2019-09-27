@@ -1,6 +1,18 @@
 #ifndef VEGA_MODEL_HPP
 #define VEGA_MODEL_HPP
 
+#include <glm/glm.hpp>
+
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+#include <vector>
+#include <string>
+
+#include <Vega/Vertex.hpp>
+#include <Vega/Mesh.hpp>
+
 namespace Vega {
   static Mesh Convert(const aiMesh *mesh, const aiScene *scene) {
     std::vector<Vertex> vertices;
@@ -17,7 +29,7 @@ namespace Vega {
     return Mesh{vertices, indices};
   }
 
-  class VEGA_API Model {
+  class Model final {
   public:
     explicit Model(const std::string &file) {
       Assimp::Importer importer;
@@ -26,8 +38,7 @@ namespace Vega {
                                                      aiProcess_FlipUVs |
                                                      aiProcess_CalcTangentSpace);
 
-      if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-        throw std::runtime_error("can not load model");
+      assert((!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) && "Failed loading model");
 
       for (unsigned int i = 0; i < scene->mNumMeshes; i++)
         mMeshes.emplace_back(Convert(scene->mMeshes[i], scene));

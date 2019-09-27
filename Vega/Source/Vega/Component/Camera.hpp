@@ -1,6 +1,11 @@
 #ifndef VEGA_CAMERA_HPP
 #define VEGA_CAMERA_HPP
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#include <Vega/Core.hpp>
+
 namespace Vega {
   class VEGA_API Camera {
   public:

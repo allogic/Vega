@@ -1,10 +1,12 @@
 #ifndef VEGA_INPUT_HPP
 #define VEGA_INPUT_HPP
 
-namespace vega {
-  class VEGA_API Input final {
+namespace Vega {
+  class Input final {
   public:
     explicit Input() = delete;
+
+    virtual ~Input() = default;
 
     /*
     static bool IsKeyPressed(int key) {
