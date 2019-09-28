@@ -14,6 +14,7 @@ Vega::Application::Application(const std::string &title,
   sInstance = this;
 
   mWindow = new Window(title, width, height, major, minor, antialiasing);
+  mWindow->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
   mImGuiLayer = new ImGuiLayer();
   PushLayer(mImGuiLayer);
@@ -23,7 +24,7 @@ void Vega::Application::Run() {
   double lastUpdateTime = 0;
   double lastFrameTime = 0;
 
-  while (!glfwWindowShouldClose(&mWindow->GetNativeWindow())) {
+  while (mRunning) {
     double now = glfwGetTime();
     double deltaTime = now - lastUpdateTime;
 
@@ -48,4 +49,22 @@ void Vega::Application::Run() {
 
     lastUpdateTime = now;
   }
+}
+
+void Vega::Application::OnEvent(Vega::Event &event) {
+  EventDispatcher dispatcher(event);
+
+  dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+
+  for (auto it = std::end(mLayerStack); it != std::begin(mLayerStack);) {
+    (*--it)->OnEvent(event);
+
+    if (event.Handled) break;
+  }
+}
+
+bool Vega::Application::OnWindowClose(WindowCloseEvent &event) {
+  mRunning = false;
+
+  return true;
 }

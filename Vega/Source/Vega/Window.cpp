@@ -23,6 +23,27 @@ Vega::Window::Window(const std::string &title,
 
   glfwMakeContextCurrent(mGLFWwindow);
 
+  glfwSetWindowUserPointer(mGLFWwindow, &mData);
+
+  glfwSetWindowSizeCallback(mGLFWwindow, [](GLFWwindow *window, int width, int height) {
+    WindowData &data = *reinterpret_cast<WindowData *>(glfwGetWindowUserPointer(window));
+
+    data.Width = width;
+    data.Height = height;
+
+    WindowResizeEvent event(width, height);
+
+    data.EventCallback(event);
+  });
+
+  glfwSetWindowCloseCallback(mGLFWwindow, [](GLFWwindow *window) {
+    WindowData &data = *reinterpret_cast<WindowData *>(glfwGetWindowUserPointer(window));
+
+    WindowCloseEvent event;
+
+    data.EventCallback(event);
+  });
+
   assert(gladLoadGL() && "Failed to initialize glad");
 }
 

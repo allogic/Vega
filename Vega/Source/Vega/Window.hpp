@@ -8,7 +8,8 @@
 
 #include <GLFW/glfw3.h>
 
-#include <Vega/Event.hpp>
+#include <Vega/Event/Event.hpp>
+#include <Vega/Event/ApplicationEvent.hpp>
 
 namespace Vega {
   class Window final {
@@ -24,14 +25,14 @@ namespace Vega {
 
     virtual ~Window();
 
-    inline unsigned int GetWidth() const { return mWidth; };
-    inline unsigned int GetHeight() const { return mHeight; };
+    inline unsigned int GetWidth() const { return mData.Width; };
+    inline unsigned int GetHeight() const { return mData.Height; };
 
     inline float AspectRatio() const {
-      return static_cast<float>(mWidth) / static_cast<float>(mHeight);
+      return static_cast<float>(mData.Width) / static_cast<float>(mData.Height);
     }
 
-    inline void SetEventCallback(const EventCallbackFunction &callback) {};
+    inline void SetEventCallback(const EventCallbackFunction &callback) { mData.EventCallback = callback; };
 
     inline GLFWwindow &GetNativeWindow() const { return *mGLFWwindow; };
 
@@ -40,6 +41,17 @@ namespace Vega {
     unsigned int mHeight;
 
     GLFWwindow *mGLFWwindow;
+
+    struct WindowData {
+      std::string Title;
+
+      unsigned int Width;
+      unsigned int Height;
+
+      EventCallbackFunction EventCallback;
+    };
+
+    WindowData mData;
   };
 }
 

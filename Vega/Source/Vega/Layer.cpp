@@ -9,3 +9,5 @@ void Vega::Layer::OnUpdate(double deltaTime) {}
 void Vega::Layer::OnDraw() {}
 
 void Vega::Layer::OnImGui(double deltaTime) {}
+
+void Vega::Layer::OnEvent(Vega::Event &event) {}

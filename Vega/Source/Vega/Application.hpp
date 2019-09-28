@@ -7,6 +7,11 @@
 #include <Vega/Layer.hpp>
 #include <Vega/LayerStack.hpp>
 
+#include <Vega/Event/Event.hpp>
+#include <Vega/Event/ApplicationEvent.hpp>
+
+#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+
 namespace Vega {
   class ImGuiLayer;
 
@@ -28,6 +33,8 @@ namespace Vega {
 
     void Run();
 
+    void OnEvent(Event &event);
+
   public:
     inline static Application &GetApplication() { return *sInstance; }
 
@@ -35,6 +42,8 @@ namespace Vega {
     unsigned int mMaxFPS = 60;
 
     double mFPSLimit = 1.0 / mMaxFPS;
+
+    bool mRunning = true;
 
     Window *mWindow;
 
@@ -44,6 +53,9 @@ namespace Vega {
 
   private:
     static Application *sInstance;
+
+  private:
+    bool OnWindowClose(WindowCloseEvent &event);
   };
 
   extern Application *Make();

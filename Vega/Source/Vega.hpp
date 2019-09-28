@@ -11,12 +11,6 @@
 //#include <Vega/Component/Camera.hpp>
 //#include <Vega/Component/Shader.hpp>
 
-int main(int argc, char **argv) {
-  auto app = Vega::Make();
-
-  app->Run();
-
-  delete app;
-}
+#include <Vega/EntryPoint.hpp>
 
 #endif

@@ -1,5 +1,10 @@
+# CLION
+.idea
+
+# CMAKE
 CMakeCache.txt
 CMakeFiles
+cmake-build-*
 CMakeScripts
 Testing
 Makefile

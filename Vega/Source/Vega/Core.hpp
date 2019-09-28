@@ -9,4 +9,6 @@
 #define VEGA_API
 #endif
 
+#define BIT(n) (1 << n)
+
 #endif
