@@ -27,6 +27,17 @@ set(GLFW_INSTALL OFF CACHE INTERNAL "Generate GLFW installation target")
 
 add_subdirectory(${GLFW_DIR})
 
+# ENTITYX
+set(ENTITYX_DIR ${VENDOR_DIR}/ENTITYX)
+
+set(ENTITYX_BUILD_TESTING false CACHE BOOL "Enable building of tests.")
+set(ENTITYX_RUN_BENCHMARKS false CACHE BOOL "Run benchmarks (in conjunction with -DENTITYX_BUILD_TESTING=1).")
+set(ENTITYX_MAX_COMPONENTS 64 CACHE STRING "Set the maximum number of components.")
+set(ENTITYX_DT_TYPE float CACHE STRING "The type used for delta time in EntityX update methods.")
+set(ENTITYX_BUILD_SHARED false CACHE BOOL "Build shared libraries?")
+
+add_subdirectory(${ENTITYX_DIR})
+
 # ASSIMP
 set(ASSIMP_DIR ${VENDOR_DIR}/ASSIMP)
 
@@ -45,8 +56,10 @@ target_include_directories(vega PUBLIC ${GLM_DIR})
 target_include_directories(vega PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/examples)
 target_include_directories(vega PUBLIC ${GLAD_DIR}/gl/include)
 target_include_directories(vega PUBLIC ${GLFW_DIR})
+target_include_directories(vega PUBLIC ${ENTITYX_DIR})
 target_include_directories(vega PUBLIC ${ASSIMP_DIR}/include)
 
 target_compile_definitions(vega PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
+target_compile_definitions(vega PRIVATE GLM_ENABLE_EXPERIMENTAL)
 
-target_link_libraries(vega glfw)
+target_link_libraries(vega glfw entityx)

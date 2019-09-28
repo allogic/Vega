@@ -10,6 +10,8 @@
 
 #include <Vega/Event/Event.hpp>
 #include <Vega/Event/ApplicationEvent.hpp>
+#include <Vega/Event/KeyEvent.hpp>
+#include <Vega/Event/MouseEvent.hpp>
 
 namespace Vega {
   class Window final {

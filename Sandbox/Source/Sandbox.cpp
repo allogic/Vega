@@ -15,7 +15,9 @@ namespace Demo {
       ImGui::Text("Demo");
     }
 
-    void OnEvent(Vega::Event &event) override {}
+    void OnEvent(Vega::Event &event) override {
+
+    }
   };
 
   class Sandbox final : public Vega::Application {

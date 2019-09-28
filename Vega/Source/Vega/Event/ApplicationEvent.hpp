@@ -9,7 +9,7 @@
 namespace Vega {
   class WindowResizeEvent final : public Event {
   public:
-    WindowResizeEvent(unsigned int width, unsigned int height) : mWidth(width), mHeight(height) {}
+    explicit WindowResizeEvent(unsigned int width, unsigned int height) : mWidth(width), mHeight(height) {}
 
     inline unsigned int GetWidth() const { return mWidth; }
     inline unsigned int GetHeight() const { return mHeight; }
@@ -17,7 +17,7 @@ namespace Vega {
     std::string ToString() const override {
       std::stringstream ss;
 
-      ss << "WindowResizeEvent: " << mWidth << ", " << mHeight;
+      ss << "WindowResizeEvent: " << mWidth << " " << mHeight;
 
       return ss.str();
     }
@@ -31,7 +31,7 @@ namespace Vega {
 
   class WindowCloseEvent final : public Event {
   public:
-    WindowCloseEvent() {}
+    explicit WindowCloseEvent() = default;
 
     EVENT_CLASS_TYPE(WindowClose)
     EVENT_CLASS_CATEGORY(EventCategoryApplication)

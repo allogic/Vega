@@ -10,6 +10,8 @@
 #include <Vega/Event/Event.hpp>
 #include <Vega/Event/ApplicationEvent.hpp>
 
+#include <Vega/System/EventSystem.hpp>
+
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 namespace Vega {

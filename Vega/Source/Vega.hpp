@@ -1,8 +1,6 @@
 #ifndef VEGA_HPP
 #define VEGA_HPP
 
-#define GLM_ENABLE_EXPERIMENTAL
-
 #include <Vega/Application.hpp>
 
 #include <Vega/ImGui/ImGuiLayer.hpp>
