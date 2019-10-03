@@ -1,14 +1,10 @@
 #ifndef VEGA_HPP
 #define VEGA_HPP
 
-#include <Vega/Application.hpp>
+//TODO prefix function params with t
+//TODO convert include guards
 
-#include <Vega/ImGui/ImGuiLayer.hpp>
-
-//#include <Vega/Component/Transform.hpp>
-//#include <Vega/Component/Camera.hpp>
-//#include <Vega/Component/Shader.hpp>
-
-#include <Vega/EntryPoint.hpp>
+#include <Vega/Core/Application.hpp>
+#include <Vega/Core/EntryPoint.hpp>
 
 #endif

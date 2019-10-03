@@ -1,4 +1,4 @@
-#include <Vega/LayerStack.hpp>
+#include <Vega/Core/LayerStack.hpp>
 
 Vega::LayerStack::~LayerStack() {
   for (auto layer : mLayers) delete layer;
@@ -9,14 +9,14 @@ void Vega::LayerStack::Push(Vega::Layer *layer) {
 
   mInsertIndex++;
 
-  layer->OnAttach();
+  layer->OnEnable();
 }
 
 void Vega::LayerStack::Pop(Vega::Layer *layer) {
   auto it = std::find(std::begin(mLayers), std::end(mLayers) + mInsertIndex, layer);
 
   if (it != std::begin(mLayers) + mInsertIndex) {
-    layer->OnDetach();
+    layer->OnDisable();
 
     mLayers.erase(it);
 

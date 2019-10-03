@@ -1,31 +1,21 @@
 #include <Vega.hpp>
 
-namespace Demo {
-  class CustomLayer final : public Vega::Layer {
-  public:
-    explicit CustomLayer() = default;
+class DemoLayer final : public Vega::Layer {
+public:
+  void OnUpdate(float deltaTime) override {
 
-    ~CustomLayer() final = default;
+  }
 
-    void OnUpdate(double deltaTime) override {}
+  void OnDraw() override {
 
-    void OnDraw() override {}
+  }
+};
 
-    void OnImGui(double deltaTime) override {
-      ImGui::Text("Demo");
-    }
+class Sandbox final : public Vega::Application {
+public:
+  explicit Sandbox() : Vega::Application() {
+    PushLayer(new DemoLayer());
+  }
+};
 
-    void OnEvent(Vega::Event &event) override {
-
-    }
-  };
-
-  class Sandbox final : public Vega::Application {
-  public:
-    Sandbox() : Application() {
-      PushLayer(new CustomLayer());
-    }
-  };
-}
-
-Vega::Application *Vega::Make() { return new Demo::Sandbox(); }
+Vega::Application *Vega::Make() { return new Sandbox(); }

@@ -1,16 +1,12 @@
 #ifndef VEGA_MODEL_HPP
 #define VEGA_MODEL_HPP
 
-#include <glm/glm.hpp>
-
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include <vector>
-#include <string>
+#include <glm/glm.hpp>
 
-#include <Vega/Vertex.hpp>
 #include <Vega/Mesh.hpp>
 
 namespace Vega {

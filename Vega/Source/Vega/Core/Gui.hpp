@@ -1,38 +1,43 @@
-#ifndef VEGA_IMGUILAYER_HPP
-#define VEGA_IMGUILAYER_HPP
+#pragma once
+
+#include <string>
 
 #include <imgui.h>
-#include <imgui_impl_opengl3.h>
 #include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
-#include <Vega/Layer.hpp>
+#include <Vega/Core/Core.hpp>
 
 namespace Vega {
-  class ImGuiLayer final : public Layer {
-  public:
-    explicit ImGuiLayer() = default;
+  class Gui final {
+  SINGLETON(Gui)
 
-    ~ImGuiLayer() final = default;
+  private:
+    explicit Gui() = default;
 
-    void OnAttach() override {
+    explicit Gui(const std::string &version) {
       IMGUI_CHECKVERSION();
 
       ImGui::CreateContext();
       ImGui::StyleColorsDark();
 
-      auto window = &Vega::Application::GetApplication().GetWindow().GetNativeWindow();
+      ImGuiIO &io = ImGui::GetIO();
 
-      ImGui_ImplGlfw_InitForOpenGL(window, true);
-      ImGui_ImplOpenGL3_Init("#version 430");
+      ImGuiStyle &style = ImGui::GetStyle();
+      style.WindowBorderSize = 0.f;
+
+      ImGui_ImplGlfw_InitForOpenGL(&Window::Get().GetNativeWindow(), true);
+      ImGui_ImplOpenGL3_Init(std::string{"#version " + version}.c_str());
     }
 
-    void OnDetach() override {
+    virtual ~Gui() {
       ImGui_ImplOpenGL3_Shutdown();
       ImGui_ImplGlfw_Shutdown();
 
       ImGui::DestroyContext();
     }
 
+  public:
     void Begin() {
       ImGui_ImplOpenGL3_NewFrame();
       ImGui_ImplGlfw_NewFrame();
@@ -48,5 +53,3 @@ namespace Vega {
     }
   };
 }
-
-#endif

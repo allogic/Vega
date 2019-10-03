@@ -22,7 +22,7 @@ git clone https://github.com/alecthomas/entityx $vendor/ENTITYX
 git clone https://github.com/g-truc/glm $vendor/GLM
 
 # IMGUI
-git clone https://github.com/ocornut/imgui $vendor/IMGUI
+git clone --single-branch --branch docking https://github.com/ocornut/imgui $vendor/IMGUI
 
 # ASSIMP
 git clone https://github.com/assimp/assimp $vendor/ASSIMP
