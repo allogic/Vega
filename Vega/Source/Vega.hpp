@@ -1,22 +1,10 @@
 #ifndef VEGA_HPP
 #define VEGA_HPP
 
-#define GLM_ENABLE_EXPERIMENTAL
+//TODO prefix function params with t
+//TODO convert include guards
 
-#include <Vega/Application.hpp>
-
-#include <Vega/ImGui/ImGuiLayer.hpp>
-
-//#include <Vega/Component/Transform.hpp>
-//#include <Vega/Component/Camera.hpp>
-//#include <Vega/Component/Shader.hpp>
-
-int main(int argc, char **argv) {
-  auto app = Vega::Make();
-
-  app->Run();
-
-  delete app;
-}
+#include <Vega/Core/Application.hpp>
+#include <Vega/Core/EntryPoint.hpp>
 
 #endif

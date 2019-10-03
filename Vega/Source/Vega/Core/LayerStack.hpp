@@ -1,10 +1,9 @@
-#ifndef VEGA_LAYERSTACK_HPP
-#define VEGA_LAYERSTACK_HPP
+#pragma once
 
 #include <vector>
 #include <algorithm>
 
-#include <Vega/Layer.hpp>
+#include <Vega/Core/Layer.hpp>
 
 namespace Vega {
   class LayerStack final {
@@ -25,5 +24,3 @@ namespace Vega {
     unsigned int mInsertIndex = 0;
   };
 }
-
-#endif

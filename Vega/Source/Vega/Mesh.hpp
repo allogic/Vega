@@ -1,9 +1,9 @@
 #ifndef VEGA_MESH_HPP
 #define VEGA_MESH_HPP
 
-#include <glad/glad.h>
-
 #include <vector>
+
+#include <glad/glad.h>
 
 #include <Vega/Vertex.hpp>
 
