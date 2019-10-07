@@ -1,5 +1,6 @@
-#ifndef VEGA_TRANSFORM_HPP
-#define VEGA_TRANSFORM_HPP
+#pragma once
+
+#include <glm/glm.hpp>
 
 namespace Vega {
   class Transform {
@@ -36,5 +37,3 @@ namespace Vega {
     glm::fvec3 mScale;
   };
 }
-
-#endif

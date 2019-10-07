@@ -1,5 +1,4 @@
-#ifndef VEGA_VERTEX_HPP
-#define VEGA_VERTEX_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -18,5 +17,3 @@ namespace Vega {
     glm::fvec3 mNormal;
   };
 }
-
-#endif

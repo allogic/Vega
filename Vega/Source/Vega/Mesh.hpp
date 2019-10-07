@@ -1,5 +1,4 @@
-#ifndef VEGA_MESH_HPP
-#define VEGA_MESH_HPP
+#pragma once
 
 #include <vector>
 
@@ -22,5 +21,3 @@ namespace Vega {
     unsigned int mEbo = 0;
   };
 }
-
-#endif

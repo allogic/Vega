@@ -1,8 +1,9 @@
-#ifndef VEGA_MOUSEEVENT_HPP
-#define VEGA_MOUSEEVENT_HPP
+#pragma once
+
+#include <Vega/Event/Event.hpp>
 
 namespace Vega {
-  class MousePositionEvent final {
+  class MousePositionEvent final : public Event {
   public:
     float X;
     float Y;
@@ -10,7 +11,14 @@ namespace Vega {
     explicit MousePositionEvent(float x, float y) : X(x), Y(y) {}
   };
 
-  class MouseScrollEvent final {
+  class MouseButtonEvent final : public Event {
+  public:
+    unsigned int Key;
+
+    explicit MouseButtonEvent(unsigned int key) : Key(key) {}
+  };
+
+  class MouseScrollEvent final : public Event {
   public:
     float X;
     float Y;
@@ -18,5 +26,3 @@ namespace Vega {
     explicit MouseScrollEvent(float x, float y) : X(x), Y(y) {}
   };
 }
-
-#endif

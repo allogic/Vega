@@ -3,6 +3,7 @@
 #include <imgui.h>
 
 #include <Vega/Debug/ShaderEditor.hpp>
+#include <Vega/Debug/ResourceHierarchy.hpp>
 
 namespace Vega::Debug {
   static void Draw() {
@@ -18,5 +19,7 @@ namespace Vega::Debug {
     ImGui::EndMainMenuBar();
 
     if (showShaderEditor) DrawShaderEditor(showShaderEditor);
+
+    DrawResourceHierarchy();
   }
 }

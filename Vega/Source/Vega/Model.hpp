@@ -1,5 +1,4 @@
-#ifndef VEGA_MODEL_HPP
-#define VEGA_MODEL_HPP
+#pragma once
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -35,5 +34,3 @@ namespace Vega {
     std::vector<Mesh> mMeshes;
   };
 }
-
-#endif

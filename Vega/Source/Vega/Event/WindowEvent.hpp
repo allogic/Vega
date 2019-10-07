@@ -1,8 +1,13 @@
-#ifndef VEGA_WINDOWEVENT_HPP
-#define VEGA_WINDOWEVENT_HPP
+#pragma once
+
+#include <Vega/Event/Event.hpp>
 
 namespace Vega {
-  class WindowResizeEvent final {
+  class WindowCloseEvent final : public Event {
+
+  };
+
+  class WindowResizeEvent final : public Event {
   public:
     unsigned int Width;
     unsigned int Height;
@@ -10,5 +15,3 @@ namespace Vega {
     explicit WindowResizeEvent(unsigned int width, unsigned int height) : Width(width), Height(height) {}
   };
 }
-
-#endif

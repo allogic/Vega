@@ -6,7 +6,7 @@
 
 #include <glad/glad.h>
 
-#include <Vega/Core/ShaderUtilities.hpp>
+#include <Vega/Core/Shader.hpp>
 
 namespace Vega::Debug {
   static void DrawShaderEditor(bool &open) {
@@ -19,15 +19,15 @@ namespace Vega::Debug {
     }
 
     if (ImGui::Button("Load")) {
-      Shader::Utility::Load(mVertexShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.vert");
-      Shader::Utility::Load(mFragmentShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.frag");
+      //Shader::Load(mVertexShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.vert");
+      //Shader::Load(mFragmentShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.frag");
     }
 
     ImGui::SameLine();
 
     if (ImGui::Button("Save")) {
-      Shader::Utility::Write(mVertexShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.vert");
-      Shader::Utility::Write(mFragmentShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.frag");
+      //Shader::Write(mVertexShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.vert");
+      //Shader::Write(mFragmentShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.frag");
     }
 
     ImGui::SameLine();
