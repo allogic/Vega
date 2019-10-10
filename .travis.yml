@@ -3,5 +3,6 @@ sudo: false
 language: cpp
 
 script:
+  - ./setup.sh
   - cmake .
   - cmake --build . -- -j2
