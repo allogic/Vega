@@ -1,21 +1,22 @@
 #include <Vega.hpp>
 
-class DemoLayer final : public Vega::Layer {
+class Sandbox final : public Vega::Core::Application {
 public:
-  void OnUpdate(float deltaTime) override {
+  void OnUpdate() override {
 
   }
 
-  void OnDraw() override {
+  void OnDraw() const override {
+
+  }
+
+  void OnEvent(const Vega::Event::Event &event) override {
+    Application::OnEvent(event);
+  }
+
+  void OnGui() override {
 
   }
 };
 
-class Sandbox final : public Vega::Application {
-public:
-  explicit Sandbox() : Vega::Application() {
-    PushLayer(new DemoLayer());
-  }
-};
-
-Vega::Application *Vega::Make() { return new Sandbox(); }
+extern Vega::Core::Application *Vega::Core::Make() { return new Sandbox(); }

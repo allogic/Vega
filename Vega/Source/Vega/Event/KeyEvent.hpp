@@ -1,14 +1,14 @@
-#ifndef VEGA_KEYEVENT_HPP
-#define VEGA_KEYEVENT_HPP
+#pragma once
 
-namespace Vega {
-  class KeyEvent final {
+#include <Vega/Event/Event.hpp>
+
+namespace Vega::Event {
+  class KeyEvent final : public Event {
   public:
     unsigned int Key;
-    unsigned int Action;
 
-    explicit KeyEvent(unsigned int key, unsigned int action) : Key(key), Action(action) {}
+    explicit KeyEvent(unsigned int key) :
+        Event(EventCategory::KeyEvent),
+        Key(key) {}
   };
 }
-
-#endif

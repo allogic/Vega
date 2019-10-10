@@ -1,5 +1,7 @@
-#ifndef VEGA_CAMERA_HPP
-#define VEGA_CAMERA_HPP
+#pragma once
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace Vega {
   class Camera {
@@ -21,5 +23,3 @@ namespace Vega {
     glm::fvec3 mUp = {0.f, 1.f, 0.f};
   };
 }
-
-#endif

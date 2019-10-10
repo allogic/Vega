@@ -15,9 +15,6 @@ git clone https://github.com/glfw/glfw $vendor/GLFW
 cd $vendor/GLFW
 cmake .
 
-# ENTITYX
-git clone https://github.com/alecthomas/entityx $vendor/ENTITYX
-
 # GLM
 git clone https://github.com/g-truc/glm $vendor/GLM
 

@@ -1,4 +1,4 @@
-#include <Vega/Mesh.hpp>
+#include <Vega/Tmp/Mesh.hpp>
 
 Vega::Mesh::Mesh(const std::vector<Vertex> &vertices, const std::vector<unsigned int> &indices) :
     mSize(indices.size()) {

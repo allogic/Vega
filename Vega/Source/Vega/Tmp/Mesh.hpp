@@ -1,11 +1,10 @@
-#ifndef VEGA_MESH_HPP
-#define VEGA_MESH_HPP
+#pragma once
 
 #include <vector>
 
 #include <glad/glad.h>
 
-#include <Vega/Vertex.hpp>
+#include <Vega/Tmp/Vertex.hpp>
 
 namespace Vega {
   class Mesh final {
@@ -22,5 +21,3 @@ namespace Vega {
     unsigned int mEbo = 0;
   };
 }
-
-#endif

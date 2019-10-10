@@ -1,5 +1,4 @@
-#ifndef VEGA_MODEL_HPP
-#define VEGA_MODEL_HPP
+#pragma once
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -7,7 +6,7 @@
 
 #include <glm/glm.hpp>
 
-#include <Vega/Mesh.hpp>
+#include <Vega/Tmp/Mesh.hpp>
 
 namespace Vega {
   static Mesh Convert(const aiMesh *mesh, const aiScene *scene) {
@@ -35,5 +34,3 @@ namespace Vega {
     std::vector<Mesh> mMeshes;
   };
 }
-
-#endif
