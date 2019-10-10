@@ -6,7 +6,7 @@
 
 #include <glm/glm.hpp>
 
-#include <Vega/Mesh.hpp>
+#include <Vega/Tmp/Mesh.hpp>
 
 namespace Vega {
   static Mesh Convert(const aiMesh *mesh, const aiScene *scene) {

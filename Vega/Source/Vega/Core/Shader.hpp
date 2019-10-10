@@ -1,35 +1,40 @@
 #pragma once
 
-#include <string>
-#include <filesystem>
+#include <Vega/Std.hpp>
+#include <Vega/Vendor.hpp>
 
-#include <glad/glad.h>
+#include <Vega/Core/Core.hpp>
+#include <Vega/Core/Filesystem.hpp>
 
-#include <Vega/Core/Io.hpp>
+#include <Vega/Debug/Core.hpp>
 
-namespace Vega {
+namespace Vega::Core {
   class Shader {
   public:
-    explicit Shader(const std::filesystem::path &vertexPath, const std::filesystem::path &fragmentPath);
+    explicit Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentPath);
 
     virtual ~Shader();
 
-    bool Load();
-    bool Save();
+  public:
+    void Load();
+    void Unload();
 
-    bool Compile(std::string &shaderError);
+    void DebugReloadIfChanged();
 
     inline void Bind() const { glUseProgram(mPid); }
+    inline void Unbind() const { glUseProgram(0); }
 
   private:
-    bool Compile(unsigned int sid, const std::string &shaderSource, std::string &shaderError) const;
+    void Compile();
+
+    bool CompileShader(unsigned int sid, const std::string &shaderSource, std::string &shaderError);
 
   private:
-    const std::filesystem::path &mVertexPath;
-    const std::filesystem::path &mFragmentPath;
+    std::chrono::high_resolution_clock::time_point mLastWriteTimeVertex;
+    std::chrono::high_resolution_clock::time_point mLastWriteTimeFragment;
 
-    std::string mVertexSource;
-    std::string mFragmentShader;
+    std::filesystem::path mVertex;
+    std::filesystem::path mFragment;
 
     unsigned int mVid;
     unsigned int mFid;

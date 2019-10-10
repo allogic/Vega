@@ -4,7 +4,7 @@
 
 #include <glad/glad.h>
 
-#include <Vega/Vertex.hpp>
+#include <Vega/Tmp/Vertex.hpp>
 
 namespace Vega {
   class Mesh final {

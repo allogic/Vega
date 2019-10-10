@@ -1,13 +1,5 @@
 #pragma once
 
-#if defined(__WIN64__)
-#define VEGA_API
-#elif defined(__APPLE__)
-#define VEGA_API
-#elif defined(__linux__)
-#define VEGA_API
-#endif
-
 #ifndef VEGA_GL_MAJOR
 #define VEGA_GL_MAJOR 4
 #endif
@@ -16,18 +8,9 @@
 #define VEGA_GL_MINOR 3
 #endif
 
-#define VEGA_DEBUG
-
-#ifdef VEGA_DEBUG
-#define VEGA_ENABLE_GUI
-#endif
-
 #define VEGA_RUNTIME_ERROR(X, MESSAGE) if(X) throw std::runtime_error(MESSAGE)
 
-#define MEASURE_BEGIN(NAME) auto NAME##_measure = std::chrono::high_resolution_clock::now()
-#define MEASURE_END(NAME, TYPE) std::chrono::duration_cast<TYPE>(NAME##_measure - std::chrono::high_resolution_clock::now()).count()
-
-#define SINGLETON(TYPE)                                               \
+#define VEGA_SINGLETON(TYPE)                                          \
 public:                                                               \
   inline static TYPE *sInstance = nullptr;                            \
                                                                       \
@@ -48,3 +31,5 @@ public:                                                               \
   static void Delete() {                                              \
     delete sInstance;                                                 \
   }
+
+#define VEGA_INSTANCE(TYPE, ...) TYPE::Get(__VA_ARGS__)

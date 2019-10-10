@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Vega {
+namespace Vega::Event {
   enum class EventCategory {
     None,
     WindowEvent,
@@ -19,5 +19,8 @@ namespace Vega {
   public:
     EventCategory Category = EventCategory::None;
     EventType Type = EventType::None;
+
+  public:
+    explicit Event(EventCategory category) : Category(category) {}
   };
 }

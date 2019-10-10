@@ -1,4 +1,4 @@
-#include <Vega/Model.hpp>
+#include <Vega/Tmp/Model.hpp>
 
 Vega::Model::Model(const std::string &file) {
   Assimp::Importer importer;

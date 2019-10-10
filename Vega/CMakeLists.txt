@@ -47,6 +47,10 @@ target_include_directories(vega PUBLIC ${GLAD_DIR}/gl/include)
 target_include_directories(vega PUBLIC ${GLFW_DIR})
 target_include_directories(vega PUBLIC ${ASSIMP_DIR}/include)
 
+target_compile_definitions(vega PUBLIC VEGA_ENABLE_DEBUG)
+target_compile_definitions(vega PUBLIC VEGA_ROOT_PATH="/home/michael/Downloads/Vega/")
+target_compile_definitions(vega PUBLIC VEGA_CPP_COMPILER="/usr/bin/gcc")
+
 target_compile_definitions(vega PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
 target_compile_definitions(vega PRIVATE GLM_ENABLE_EXPERIMENTAL)
 

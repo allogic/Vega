@@ -1,9 +1,27 @@
 #include <Vega/Core/Shader.hpp>
 
-Vega::Shader::Shader(const std::filesystem::path &vertexPath, const std::filesystem::path &fragmentPath) :
-    mVertexPath(vertexPath), mFragmentPath(fragmentPath) {
+Vega::Core::Shader::Shader(std::filesystem::path vertex, std::filesystem::path fragment) :
+    mVertex(vertex),
+    mFragment(fragment),
+    mLastWriteTimeVertex(std::filesystem::last_write_time(vertex)),
+    mLastWriteTimeFragment(std::filesystem::last_write_time(fragment)) {
+  Load();
+}
+
+Vega::Core::Shader::~Shader() {
+  Unload();
+}
+
+void Vega::Core::Shader::Load() {
   mVid = glCreateShader(GL_VERTEX_SHADER);
   mFid = glCreateShader(GL_FRAGMENT_SHADER);
+
+  Compile();
+
+  glAttachShader(mPid, mVid);
+  glAttachShader(mPid, mFid);
+
+  glLinkProgram(mPid);
 
   glDetachShader(mPid, mVid);
   glDetachShader(mPid, mFid);
@@ -11,40 +29,46 @@ Vega::Shader::Shader(const std::filesystem::path &vertexPath, const std::filesys
   mPid = glCreateProgram();
 }
 
-Vega::Shader::~Shader() {
+void Vega::Core::Shader::Unload() {
   glDeleteShader(mVid);
   glDeleteShader(mFid);
 
   glDeleteProgram(mPid);
 }
 
-bool Vega::Shader::Load() {
-  if (!Io::Read(mVertexSource, mVertexPath)) return false;
-  if (!Io::Read(mFragmentShader, mFragmentPath)) return false;
+void Vega::Core::Shader::DebugReloadIfChanged() {
+  auto currentWriteTimeVertex = std::filesystem::last_write_time(mVertex);
+  auto currentWriteTimeFragment = std::filesystem::last_write_time(mFragment);
 
-  return true;
+  if (mLastWriteTimeVertex >= currentWriteTimeVertex && mLastWriteTimeFragment >= currentWriteTimeFragment) return;
+
+  mLastWriteTimeVertex = currentWriteTimeVertex;
+  mLastWriteTimeFragment = currentWriteTimeFragment;
+
+  Unload();
+  Load();
 }
 
-bool Vega::Shader::Save() {
-  if (!Io::Write(mVertexSource, mVertexPath)) return false;
-  if (!Io::Write(mFragmentShader, mFragmentPath)) return false;
+void Vega::Core::Shader::Compile() {
+  std::string vertexSource;
+  Filesystem::Read(vertexSource, mVertex);
 
-  return true;
+  std::string fragmentSource;
+  Filesystem::Read(fragmentSource, mFragment);
+
+  std::string shaderError;
+
+  VEGA_INFO("Compiling shader %s %s", mVertex.filename().c_str(), mFragment.filename().c_str());
+
+  VEGA_INFO("===========%s COMPILING===========", "BEGIN")
+  if (!CompileShader(mVid, vertexSource, shaderError)) std::cout << shaderError << std::endl;
+  if (!CompileShader(mFid, fragmentSource, shaderError)) std::cout << shaderError << std::endl;
+  VEGA_INFO("===========%s COMPILING===========", " END ")
+
+  VEGA_INFO("Compiling shader VertexId: %d FragmentId: %d", mVid, mFid);
 }
 
-bool Vega::Shader::Compile(std::string &shaderError) {
-  if (!Compile(mVid, mVertexSource, shaderError)) return false;
-  if (!Compile(mFid, mFragmentShader, shaderError)) return false;
-
-  glAttachShader(mPid, mVid);
-  glAttachShader(mPid, mFid);
-
-  glLinkProgram(mPid);
-
-  return true;
-}
-
-bool Vega::Shader::Compile(unsigned int sid, const std::string &shaderSource, std::string &shaderError) const {
+bool Vega::Core::Shader::CompileShader(unsigned int sid, const std::string &shaderSource, std::string &shaderError) {
   const char *ptr = shaderSource.c_str();
 
   glShaderSource(sid, 1, &ptr, nullptr);
@@ -67,3 +91,4 @@ bool Vega::Shader::Compile(unsigned int sid, const std::string &shaderSource, st
 
   return true;
 }
+

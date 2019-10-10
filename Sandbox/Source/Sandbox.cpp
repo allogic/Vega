@@ -1,6 +1,6 @@
 #include <Vega.hpp>
 
-class Sandbox final : public Vega::Application {
+class Sandbox final : public Vega::Core::Application {
 public:
   void OnUpdate() override {
 
@@ -10,7 +10,7 @@ public:
 
   }
 
-  void OnEvent(const Vega::Event &event) override {
+  void OnEvent(const Vega::Event::Event &event) override {
     Application::OnEvent(event);
   }
 
@@ -19,4 +19,4 @@ public:
   }
 };
 
-Vega::Application *Vega::Make() { return new Sandbox(); }
+extern Vega::Core::Application *Vega::Core::Make() { return new Sandbox(); }

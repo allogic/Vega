@@ -2,9 +2,11 @@
 
 #include <Vega/Event/Event.hpp>
 
-namespace Vega {
+namespace Vega::Event {
   class WindowCloseEvent final : public Event {
-
+  public:
+    explicit WindowCloseEvent() :
+        Event(EventCategory::WindowEvent) {}
   };
 
   class WindowResizeEvent final : public Event {
@@ -12,6 +14,8 @@ namespace Vega {
     unsigned int Width;
     unsigned int Height;
 
-    explicit WindowResizeEvent(unsigned int width, unsigned int height) : Width(width), Height(height) {}
+    explicit WindowResizeEvent(unsigned int width, unsigned int height) :
+        Event(EventCategory::WindowEvent),
+        Width(width), Height(height) {}
   };
 }
