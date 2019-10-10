@@ -3,6 +3,7 @@ sudo: false
 language: cpp
 
 script:
+  - apt-get install xorg-dev -y
   - ./setup.sh
   - cmake .
   - cmake --build . -- -j2
