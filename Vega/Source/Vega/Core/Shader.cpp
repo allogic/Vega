@@ -1,10 +1,10 @@
 #include <Vega/Core/Shader.hpp>
 
-Vega::Core::Shader::Shader(std::filesystem::path vertex, std::filesystem::path fragment) :
+Vega::Core::Shader::Shader(fs::path vertex, fs::path fragment) :
     mVertex(vertex),
     mFragment(fragment),
-    mLastWriteTimeVertex(std::filesystem::last_write_time(vertex)),
-    mLastWriteTimeFragment(std::filesystem::last_write_time(fragment)) {
+    mLastWriteTimeVertex(fs::last_write_time(vertex)),
+    mLastWriteTimeFragment(fs::last_write_time(fragment)) {
   Load();
 }
 
@@ -37,8 +37,8 @@ void Vega::Core::Shader::Unload() {
 }
 
 void Vega::Core::Shader::DebugReloadIfChanged() {
-  auto currentWriteTimeVertex = std::filesystem::last_write_time(mVertex);
-  auto currentWriteTimeFragment = std::filesystem::last_write_time(mFragment);
+  auto currentWriteTimeVertex = fs::last_write_time(mVertex);
+  auto currentWriteTimeFragment = fs::last_write_time(mFragment);
 
   if (mLastWriteTimeVertex >= currentWriteTimeVertex && mLastWriteTimeFragment >= currentWriteTimeFragment) return;
 

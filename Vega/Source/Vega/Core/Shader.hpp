@@ -11,7 +11,7 @@
 namespace Vega::Core {
   class Shader {
   public:
-    explicit Shader(std::filesystem::path vertexPath, std::filesystem::path fragmentPath);
+    explicit Shader(fs::path vertexPath, fs::path fragmentPath);
 
     virtual ~Shader();
 
@@ -33,8 +33,8 @@ namespace Vega::Core {
     std::chrono::high_resolution_clock::time_point mLastWriteTimeVertex;
     std::chrono::high_resolution_clock::time_point mLastWriteTimeFragment;
 
-    std::filesystem::path mVertex;
-    std::filesystem::path mFragment;
+    fs::path mVertex;
+    fs::path mFragment;
 
     unsigned int mVid;
     unsigned int mFid;

@@ -1,15 +1,22 @@
 #pragma once
 
-#include <iostream>
 #include <cstdlib>
-#include <functional>
+
 #include <string>
+#include <regex>
+
+#include <iostream>
 #include <fstream>
 #include <sstream>
-#include <filesystem>
+
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+
 #include <vector>
 #include <map>
 #include <tuple>
+
 #include <memory>
+
+#include <functional>
 #include <algorithm>
-#include <regex>
