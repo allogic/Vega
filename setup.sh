@@ -12,4 +12,3 @@ git clone --single-branch --branch docking https://github.com/ocornut/imgui "$ve
 git clone --single-branch --branch master https://github.com/assimp/assimp "$vendor/ASSIMP"   # ASSIMP
 
 cd "$vendor/GLAD" && python -m glad --generator=c --out-path=gl                               # GLAD (downloading remote files)
-cmake . && cmake --build . -- -j2                                                             # VEGA
