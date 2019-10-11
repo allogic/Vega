@@ -2,26 +2,14 @@
 
 vendor=$(pwd)/Vega/Vendor
 
-rm -rf $vendor
-mkdir -p $vendor
+rm -rf "$vendor"
+mkdir -p "$vendor"
 
-# GLAD
-git clone https://github.com/Dav1dde/glad $vendor/GLAD
-cd $vendor/GLAD
-python -m glad --generator=c --out-path=gl
+git clone --single-branch --branch master https://github.com/Dav1dde/glad "$vendor/GLAD"      # GLAD
+git clone --single-branch --branch master https://github.com/glfw/glfw "$vendor/GLFW"         # GLFW
+git clone --single-branch --branch master https://github.com/g-truc/glm "$vendor/GLM"         # GLM
+git clone --single-branch --branch docking https://github.com/ocornut/imgui "$vendor/IMGUI"   # IMGUI (dockable experimental)
+git clone --single-branch --branch master https://github.com/assimp/assimp "$vendor/ASSIMP"   # ASSIMP
 
-# GLFW
-git clone https://github.com/glfw/glfw $vendor/GLFW
-cd $vendor/GLFW
-cmake .
-
-# GLM
-git clone https://github.com/g-truc/glm $vendor/GLM
-
-# IMGUI
-git clone --single-branch --branch docking https://github.com/ocornut/imgui $vendor/IMGUI
-
-# ASSIMP
-git clone https://github.com/assimp/assimp $vendor/ASSIMP
-cd $vendor/ASSIMP
-cmake . && make -j4
+cd "$vendor/GLAD" && python -m glad --generator=c --out-path=gl                               # GLAD (downloading remote files)
+cmake . && cmake --build . -- -j2                                                             # VEGA

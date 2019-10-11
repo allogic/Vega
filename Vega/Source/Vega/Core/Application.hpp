@@ -7,6 +7,8 @@
 #include <Vega/Core/ModuleLoader.hpp>
 #include <Vega/Core/ShaderLoader.hpp>
 
+#include <Vega/Tmp/Model.hpp>
+
 #include <Vega/Event/WindowEvent.hpp>
 #include <Vega/Event/MouseEvent.hpp>
 #include <Vega/Event/KeyEvent.hpp>

@@ -8,7 +8,11 @@ add_executable(sandbox ${SOURCE_DIR}/Sandbox.cpp
         ${SANDBOX_HEADER}
         ${SANDBOX_SOURCE})
 
-target_include_directories(sandbox PUBLIC ${SOURCE_DIR})
-target_include_directories(sandbox PUBLIC ${VEGA_DIR})
+target_include_directories(sandbox
+        PUBLIC ${VEGA_DIR}                                          # VEGA
+        PUBLIC ${SOURCE_DIR}                                        # SANDBOX
+        )
 
-target_link_libraries(sandbox vega)
+target_link_libraries(sandbox
+        vega                                                        # VEGA
+        )
