@@ -24,6 +24,8 @@ find_package(glfw3 3 REQUIRED)
 # ASSIMP
 set(ASSIMP_DIR ${VENDOR_DIR}/ASSIMP)
 
+add_subdirectory(${ASSIMP_DIR})
+
 # VEGA
 file(GLOB_RECURSE VEGA_HEADER ${SOURCE_DIR}/*.hpp)
 file(GLOB_RECURSE VEGA_SOURCE ${SOURCE_DIR}/*.cpp)
@@ -34,17 +36,21 @@ add_library(${PROJECT_NAME}
         ${VEGA_HEADER}
         ${IMGUI_SOURCE}
         ${GLAD_SOURCE}
+        ${ASSIMP_DIR}
         )
 
 target_compile_definitions(${PROJECT_NAME}
-        PUBLIC VEGA_ENABLE_DEBUG                                # VEGA
-        PUBLIC VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"   # VEGA
-        PUBLIC VEGA_CPP_COMPILER="/usr/bin/gcc"                 # VEGA
+        PUBLIC VEGA_ENABLE_DEBUG                               # VEGA
+        PUBLIC VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"  # VEGA
+        PUBLIC VEGA_CPP_COMPILER="/usr/bin/gcc"                # VEGA
         )
 
 target_compile_definitions(${PROJECT_NAME}
         PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD                   # IMGUI
         PRIVATE GLM_ENABLE_EXPERIMENTAL                         # GLM
+        PRIVATE VEGA_ENABLE_DEBUG                               # VEGA
+        PRIVATE VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"  # VEGA
+        PRIVATE VEGA_CPP_COMPILER="/usr/bin/gcc"                # VEGA
         )
 
 target_include_directories(${PROJECT_NAME}
