@@ -8,8 +8,8 @@ namespace Vega::Core::Filesystem {
   static const std::string RootPath = VEGA_ROOT_PATH;
   static const std::string CppCompiler = VEGA_CPP_COMPILER;
 
-  static bool Read(std::string &data, const std::filesystem::path &root) {
-    VEGA_RUNTIME_ERROR(!std::filesystem::exists(root) || std::filesystem::is_directory(root), "Invalid root path");
+  static bool Read(std::string &data, const fs::path &root) {
+    VEGA_RUNTIME_ERROR(!fs::exists(root) || fs::is_directory(root), "Invalid root path");
 
     std::ifstream file(root);
 
@@ -28,8 +28,8 @@ namespace Vega::Core::Filesystem {
     return true;
   }
 
-  static bool Write(const std::string &data, const std::filesystem::path &root) {
-    VEGA_RUNTIME_ERROR(!std::filesystem::exists(root) || std::filesystem::is_directory(root), "Invalid root path");
+  static bool Write(const std::string &data, const fs::path &root) {
+    VEGA_RUNTIME_ERROR(!fs::exists(root) || fs::is_directory(root), "Invalid root path");
 
     std::ofstream file(root);
 
@@ -44,18 +44,18 @@ namespace Vega::Core::Filesystem {
 
   template<typename Constraint>
   static void RecursiveConstraintFor(
-      const std::filesystem::path &root,
+      const fs::path &root,
       const Constraint &constraint,
-      const std::function<void(const std::filesystem::path &)> &predicate) {
-    VEGA_RUNTIME_ERROR(!std::filesystem::is_directory(root), "Invalid root path");
+      const std::function<void(const fs::path &)> &predicate) {
+    VEGA_RUNTIME_ERROR(!fs::is_directory(root), "Invalid root path");
 
-    std::filesystem::path currentPath;
+    fs::path currentPath;
 
     bool checkCurrentFolder = false;
     bool isValidShader = true;
 
-    for (const auto &path : std::filesystem::directory_iterator(root)) {
-      if (std::filesystem::is_directory(path)) RecursiveConstraintFor(path, constraint, predicate);
+    for (const auto &path : fs::directory_iterator(root)) {
+      if (fs::is_directory(path)) RecursiveConstraintFor(path, constraint, predicate);
       else {
         currentPath = path;
 
@@ -70,7 +70,7 @@ namespace Vega::Core::Filesystem {
   struct ExtensionConstraint {
     const std::vector<std::string> &Extensions;
 
-    bool operator()(const std::filesystem::path &root) const {
+    bool operator()(const fs::path &root) const {
       const std::string fileExtension = root.extension().string();
 
       return std::find(std::cbegin(Extensions), std::cend(Extensions), fileExtension) != std::cend(Extensions);
@@ -80,7 +80,7 @@ namespace Vega::Core::Filesystem {
   struct NameExtensionConstraint {
     const std::vector<std::string> &Extensions;
 
-    bool operator()(const std::filesystem::path &root) const {
+    bool operator()(const fs::path &root) const {
       const std::string fileName = root.stem().string() + root.extension().string();
 
       return std::find(std::cbegin(Extensions), std::cend(Extensions), fileName) != std::cend(Extensions);

@@ -1,8 +1,8 @@
 #include <Vega/Core/ModuleLoader.hpp>
 
-Vega::Core::ModuleLoader::ModuleLoader(const std::filesystem::path &root) {
+Vega::Core::ModuleLoader::ModuleLoader(const fs::path &root) {
   Filesystem::RecursiveConstraintFor(root, Filesystem::NameExtensionConstraint{{".cpp"}},
-                                     [&](const std::filesystem::path &path) {
+                                     [&](const fs::path &path) {
                                        const std::string module =
                                            path.parent_path().string() + "/" + path.filename().stem().string();
 

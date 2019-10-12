@@ -1,0 +1,11 @@
+dist: bionic
+language: cpp
+
+before_install:
+  - sudo apt-get install libglfw3-dev -y
+  - sudo apt-get install xorg-dev -y
+
+script:
+  - ./setup.sh
+  - cmake .
+  - cmake --build . -- -j2

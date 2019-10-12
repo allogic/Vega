@@ -17,7 +17,7 @@ namespace Vega::Core {
   private:
     explicit ShaderLoader() = default;
 
-    explicit ShaderLoader(const std::filesystem::path &root);
+    explicit ShaderLoader(const fs::path &root);
 
   private:
     std::vector<std::shared_ptr<Shader>> mShaders;

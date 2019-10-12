@@ -93,8 +93,8 @@ Vega::Core::Application::Application(const std::string &title,
   style.WindowBorderSize = 0.f;
 #endif
 
-  VEGA_INSTANCE(ModuleLoader, Filesystem::RootPath + "Sandbox/Module").DebugReloadIfChanged();
-  VEGA_INSTANCE(ShaderLoader, Filesystem::RootPath + "Sandbox/Shader").DebugReloadIfChanged();
+  VEGA_INSTANCE(ModuleLoader, fs::path{Filesystem::RootPath + "Sandbox/Module"}).DebugReloadIfChanged();
+  VEGA_INSTANCE(ShaderLoader, fs::path{Filesystem::RootPath + "Sandbox/Shader"}).DebugReloadIfChanged();
 }
 
 Vega::Core::Application::~Application() {

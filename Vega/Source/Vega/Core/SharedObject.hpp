@@ -14,7 +14,7 @@ namespace Vega::Core {
     using create_t = Module *();
 
   public:
-    SharedObject(std::filesystem::path input, std::filesystem::path output);
+    SharedObject(fs::path input, fs::path output);
 
     virtual ~SharedObject();
 
@@ -34,8 +34,8 @@ namespace Vega::Core {
   private:
     std::chrono::high_resolution_clock::time_point mLastWriteTime;
 
-    std::filesystem::path mInput;
-    std::filesystem::path mOutput;
+    fs::path mInput;
+    fs::path mOutput;
 
     void *mDlHandle = nullptr;
 

@@ -1,8 +1,7 @@
 #pragma once
 
-#include <vector>
-
-#include <glad/glad.h>
+#include <Vega/Std.hpp>
+#include <Vega/Vendor.hpp>
 
 #include <Vega/Tmp/Vertex.hpp>
 

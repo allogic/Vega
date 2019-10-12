@@ -21,7 +21,7 @@ namespace Vega::Core {
   private:
     explicit ModuleLoader() = default;
 
-    explicit ModuleLoader(const std::filesystem::path &root);
+    explicit ModuleLoader(const fs::path &root);
 
   private:
     std::vector<std::unique_ptr<SharedObject>> mSharedObjects;

@@ -1,8 +1,8 @@
 #include <Vega/Core/ShaderLoader.hpp>
 
-Vega::Core::ShaderLoader::ShaderLoader(const std::filesystem::path &root) {
+Vega::Core::ShaderLoader::ShaderLoader(const fs::path &root) {
   Filesystem::RecursiveConstraintFor(root, Filesystem::ExtensionConstraint{{".vert", ".frag"}},
-                                     [&](const std::filesystem::path &path) {
+                                     [&](const fs::path &path) {
                                        const std::string shader =
                                            path.parent_path().string() + "/" + path.filename().stem().string();
 

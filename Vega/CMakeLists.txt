@@ -14,45 +14,69 @@ file(GLOB IMGUI_SOURCE
 
 # GLAD
 set(GLAD_DIR ${VENDOR_DIR}/GLAD)
+set(GLAD_INCLUDE_DIR ${GLAD_DIR}/gl/include)
 
-file(GLOB GLAD_SOURCE ${GLAD_DIR}/gl/src/glad.c)
+set(GLAD_SOURCE ${GLAD_DIR}/gl/src/glad.c)
 
 # GLFW
 set(GLFW_DIR ${VENDOR_DIR}/GLFW)
 
-set(GLFW_BUILD_EXAMPLES OFF CACHE INTERNAL "Build the GLFW examples")
-set(GLFW_BUILD_TESTS OFF CACHE INTERNAL "Build the GLFW tests")
-set(GLFW_BUILD_DOCS OFF CACHE INTERNAL "Build the GLFW documentation")
-set(GLFW_INSTALL OFF CACHE INTERNAL "Generate GLFW installation target")
+set(GLFW_BUILD_EXAMPLES OFF)
+set(GLFW_BUILD_TESTS OFF)
+set(GLFW_BUILD_DOCS OFF)
+set(GLFW_INSTALL OFF)
 
 add_subdirectory(${GLFW_DIR})
 
 # ASSIMP
 set(ASSIMP_DIR ${VENDOR_DIR}/ASSIMP)
 
+set(BUILD_SHARED_LIBS OFF)
+set(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
+set(ASSIMP_BUILD_TESTS OFF)
+set(INJECT_DEBUG_POSTFIX)
+
+add_subdirectory(${ASSIMP_DIR})
+
 # VEGA
 file(GLOB_RECURSE VEGA_HEADER ${SOURCE_DIR}/*.hpp)
 file(GLOB_RECURSE VEGA_SOURCE ${SOURCE_DIR}/*.cpp)
 
-add_library(vega ${SOURCE_DIR}/Vega.hpp
-        ${VEGA_HEADER}
+add_library(${PROJECT_NAME}
+        ${SOURCE_DIR}/Vega.hpp
         ${VEGA_SOURCE}
+        ${VEGA_HEADER}
         ${IMGUI_SOURCE}
-        ${GLAD_SOURCE})
+        ${GLAD_SOURCE}
+        )
 
-target_include_directories(vega PUBLIC ${SOURCE_DIR})
-target_include_directories(vega PUBLIC ${GLM_DIR})
-target_include_directories(vega PUBLIC ${IMGUI_DIR} ${IMGUI_DIR}/examples)
-target_include_directories(vega PUBLIC ${GLAD_DIR}/gl/include)
-target_include_directories(vega PUBLIC ${GLFW_DIR})
-target_include_directories(vega PUBLIC ${ASSIMP_DIR}/include)
+target_compile_definitions(${PROJECT_NAME}
+        PUBLIC VEGA_ENABLE_DEBUG                                # VEGA
+        PUBLIC VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"   # VEGA
+        PUBLIC VEGA_CPP_COMPILER="/usr/bin/gcc"                 # VEGA
+        )
 
-target_compile_definitions(vega PUBLIC VEGA_ENABLE_DEBUG)
-target_compile_definitions(vega PUBLIC VEGA_ROOT_PATH="/home/michael/Downloads/Vega/")
-target_compile_definitions(vega PUBLIC VEGA_CPP_COMPILER="/usr/bin/gcc")
+target_compile_definitions(${PROJECT_NAME}
+        PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD                   # IMGUI
+        PRIVATE GLM_ENABLE_EXPERIMENTAL                         # GLM
+        PRIVATE VEGA_ENABLE_DEBUG                               # VEGA
+        PRIVATE VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"  # VEGA
+        PRIVATE VEGA_CPP_COMPILER="/usr/bin/gcc"                # VEGA
+        )
 
-target_compile_definitions(vega PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD)
-target_compile_definitions(vega PRIVATE GLM_ENABLE_EXPERIMENTAL)
+target_include_directories(${PROJECT_NAME}
+        PUBLIC ${OPENGL_INCLUDE_DIR}                            # OPENGL
+        PUBLIC ${GLAD_INCLUDE_DIR}                              # GLAD
+        PUBLIC ${GLFW_DIR}
+        PUBLIC ${IMGUI_DIR}                                     # IMGUI
+        PUBLIC ${GLM_DIR}                                       # GLM
+        PUBLIC ${ASSIMP_DIR}/include                            # ASSIMP
+        PUBLIC ${SOURCE_DIR}                                    # VEGA
+        )
 
-target_link_libraries(vega glfw)
-target_link_libraries(vega stdc++fs)
+target_link_libraries(${PROJECT_NAME}
+        ${CMAKE_DL_LIBS}                                        # DLLIB
+        glfw                                                    # GLFW
+        assimp                                                  # ASSIMP
+        stdc++fs                                                # STD (filesystem experimental)
+        )

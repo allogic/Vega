@@ -1,9 +1,9 @@
 #include <Vega/Core/SharedObject.hpp>
 
-Vega::Core::SharedObject::SharedObject(std::filesystem::path input, std::filesystem::path output) :
+Vega::Core::SharedObject::SharedObject(fs::path input, fs::path output) :
     mInput(input),
     mOutput(output),
-    mLastWriteTime(std::filesystem::last_write_time(input)) {
+    mLastWriteTime(fs::last_write_time(input)) {
   Load();
 }
 
@@ -20,7 +20,7 @@ void Vega::Core::SharedObject::Unload() {
 }
 
 void Vega::Core::SharedObject::DebugReloadIfChanged() {
-  auto currWriteTime = std::filesystem::last_write_time(mInput);
+  auto currWriteTime = fs::last_write_time(mInput);
 
   if (mLastWriteTime >= currWriteTime) return;
 
