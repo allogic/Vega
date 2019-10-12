@@ -7,4 +7,5 @@ before_install:
 
 script:
   - ./setup.sh
-  - cmake . && cmake --build . -- -j2
+  - cmake .
+  - cmake --build . -- -j2
