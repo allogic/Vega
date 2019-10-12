@@ -19,10 +19,22 @@ set(GLAD_INCLUDE_DIR ${GLAD_DIR}/gl/include)
 set(GLAD_SOURCE ${GLAD_DIR}/gl/src/glad.c)
 
 # GLFW
-find_package(glfw3 3 REQUIRED)
+set(GLFW_DIR ${VENDOR_DIR}/GLFW)
+
+set(GLFW_BUILD_EXAMPLES OFF)
+set(GLFW_BUILD_TESTS OFF)
+set(GLFW_BUILD_DOCS OFF)
+set(GLFW_INSTALL OFF)
+
+add_subdirectory(${GLFW_DIR})
 
 # ASSIMP
 set(ASSIMP_DIR ${VENDOR_DIR}/ASSIMP)
+
+set(BUILD_SHARED_LIBS OFF)
+set(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
+set(ASSIMP_BUILD_TESTS OFF)
+set(INJECT_DEBUG_POSTFIX)
 
 add_subdirectory(${ASSIMP_DIR})
 
@@ -36,13 +48,12 @@ add_library(${PROJECT_NAME}
         ${VEGA_HEADER}
         ${IMGUI_SOURCE}
         ${GLAD_SOURCE}
-        ${ASSIMP_DIR}
         )
 
 target_compile_definitions(${PROJECT_NAME}
-        PUBLIC VEGA_ENABLE_DEBUG                               # VEGA
-        PUBLIC VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"  # VEGA
-        PUBLIC VEGA_CPP_COMPILER="/usr/bin/gcc"                # VEGA
+        PUBLIC VEGA_ENABLE_DEBUG                                # VEGA
+        PUBLIC VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"   # VEGA
+        PUBLIC VEGA_CPP_COMPILER="/usr/bin/gcc"                 # VEGA
         )
 
 target_compile_definitions(${PROJECT_NAME}
@@ -56,6 +67,7 @@ target_compile_definitions(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${OPENGL_INCLUDE_DIR}                            # OPENGL
         PUBLIC ${GLAD_INCLUDE_DIR}                              # GLAD
+        PUBLIC ${GLFW_DIR}
         PUBLIC ${IMGUI_DIR}                                     # IMGUI
         PUBLIC ${GLM_DIR}                                       # GLM
         PUBLIC ${ASSIMP_DIR}/include                            # ASSIMP
@@ -65,5 +77,6 @@ target_include_directories(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
         ${CMAKE_DL_LIBS}                                        # DLLIB
         glfw                                                    # GLFW
+        assimp                                                  # ASSIMP
         stdc++fs                                                # STD (filesystem experimental)
         )
