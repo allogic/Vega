@@ -4,17 +4,16 @@
 #include <Vega/Platform.hpp>
 
 #include <Vega/Core/Module.hpp>
-#include <Vega/Core/Filesystem.hpp>
 
-#include <Vega/Debug/Core.hpp>
+#include <Vega/Utility/Io.hpp>
 
 namespace Vega::Core {
   class SharedObject final {
   public:
-    using create_t = Module *();
+    using CreateModule = Module *();
 
   public:
-    SharedObject(fs::path input, fs::path output);
+    SharedObject(std::experimental::filesystem::path input, std::experimental::filesystem::path output);
 
     virtual ~SharedObject();
 
@@ -34,12 +33,12 @@ namespace Vega::Core {
   private:
     std::chrono::high_resolution_clock::time_point mLastWriteTime;
 
-    fs::path mInput;
-    fs::path mOutput;
+    std::experimental::filesystem::path mInput;
+    std::experimental::filesystem::path mOutput;
 
     void *mDlHandle = nullptr;
 
-    create_t *mCreate = nullptr;
+    CreateModule *mCreate = nullptr;
 
     Module *mInstance = nullptr;
   };

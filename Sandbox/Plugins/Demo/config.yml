@@ -1,0 +1,7 @@
+name: Demo
+type: plugin
+output-path: /home/michael/Downloads/Vega/Sandbox/Plugins/Demo
+
+files:
+  - Demo.cpp
+  - Test.hpp

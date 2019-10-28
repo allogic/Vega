@@ -1,17 +1,15 @@
 #pragma once
 
 #include <Vega/Std.hpp>
-#include <Vega/Vendor.hpp>
 
 #include <Vega/Core/Core.hpp>
-#include <Vega/Core/Filesystem.hpp>
 
-#include <Vega/Debug/Core.hpp>
+#include <Vega/Utility/Io.hpp>
 
-namespace Vega::Core {
+/*namespace Vega::Core {
   class Shader {
   public:
-    explicit Shader(fs::path vertexPath, fs::path fragmentPath);
+    explicit Shader(std::experimental::filesystem::path vertexPath, std::experimental::filesystem::path fragmentPath);
 
     virtual ~Shader();
 
@@ -33,11 +31,11 @@ namespace Vega::Core {
     std::chrono::high_resolution_clock::time_point mLastWriteTimeVertex;
     std::chrono::high_resolution_clock::time_point mLastWriteTimeFragment;
 
-    fs::path mVertex;
-    fs::path mFragment;
+    std::experimental::filesystem::path mVertex;
+    std::experimental::filesystem::path mFragment;
 
     unsigned int mVid;
     unsigned int mFid;
     unsigned int mPid;
   };
-}
+}*/

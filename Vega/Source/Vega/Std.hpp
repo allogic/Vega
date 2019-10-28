@@ -10,7 +10,6 @@
 #include <sstream>
 
 #include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
 
 #include <vector>
 #include <map>
@@ -20,3 +19,4 @@ namespace fs = std::experimental::filesystem;
 
 #include <functional>
 #include <algorithm>
+#include <variant>

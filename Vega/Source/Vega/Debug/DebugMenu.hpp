@@ -10,7 +10,7 @@ namespace Vega::Debug {
     static bool showShaderEditor = false;
 
     if (ImGui::BeginMainMenuBar()) {
-      if (ImGui::BeginMenu("Shader")) {
+      if (ImGui::BeginMenu("Shaders")) {
         if (ImGui::MenuItem("Open Editor")) showShaderEditor = true;
         ImGui::EndMenu();
       }

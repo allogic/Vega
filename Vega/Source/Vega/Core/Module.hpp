@@ -1,12 +1,17 @@
 #pragma once
 
+#include <Vega/Event/Event.hpp>
+
 namespace Vega::Core {
   class Module {
   public:
-    virtual void OnUpdate(float deltaTime) = 0;
-
-  public:
     explicit Module() = default;
     virtual ~Module() = default;
+
+  public:
+    virtual void OnUpdate(float deltaTime) = 0;
+    virtual void OnDraw() const = 0;
+    virtual void OnEvent(const Event::Event &event) = 0;
+    virtual void OnGui() = 0;
   };
 }

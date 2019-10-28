@@ -13,21 +13,21 @@ namespace Vega::Debug {
     static std::string mVertexShaderSource;
     static std::string mFragmentShaderSource;
 
-    if (!ImGui::Begin("Shader Editor", &open)) {
+    if (!ImGui::Begin("Shaders Editor", &open)) {
       ImGui::End();
       return;
     }
 
     if (ImGui::Button("Load")) {
-      //Shader::Load(mVertexShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.vert");
-      //Shader::Load(mFragmentShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.frag");
+      //Shaders::Load(mVertexShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shaders/Demo.vert");
+      //Shaders::Load(mFragmentShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shaders/Demo.frag");
     }
 
     ImGui::SameLine();
 
     if (ImGui::Button("Save")) {
-      //Shader::Write(mVertexShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.vert");
-      //Shader::Write(mFragmentShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shader/DemoShader.frag");
+      //Shaders::Write(mVertexShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shaders/Demo.vert");
+      //Shaders::Write(mFragmentShaderSource, "/home/michael/Downloads/Vega/Sandbox/Shaders/Demo.frag");
     }
 
     ImGui::SameLine();
@@ -36,8 +36,8 @@ namespace Vega::Debug {
       //ShaderCompiler::Compile(mShaderSource);
     }
 
-    ImGui::Text("Vertex Shader");
-    ImGui::Text("Fragment Shader");
+    ImGui::Text("Vertex Shaders");
+    ImGui::Text("Fragment Shaders");
 
     static auto flags = ImGuiInputTextFlags_AllowTabInput | ImGuiInputTextFlags_CtrlEnterForNewLine;
 

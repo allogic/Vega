@@ -1,74 +1,48 @@
 #pragma once
 
 #include <Vega/Std.hpp>
-#include <Vega/Vendor.hpp>
+
+#include <Vega/Vendor/Glfw.hpp>
+#include <Vega/Vendor/Imgui.hpp>
+#include <Vega/Vendor/Glm.hpp>
 
 #include <Vega/Core/Core.hpp>
-#include <Vega/Core/ModuleLoader.hpp>
-#include <Vega/Core/ShaderLoader.hpp>
-
-#include <Vega/Tmp/Model.hpp>
-
-#include <Vega/Event/WindowEvent.hpp>
-#include <Vega/Event/MouseEvent.hpp>
-#include <Vega/Event/KeyEvent.hpp>
-
-#include <Vega/Debug/DebugMenu.hpp>
-#include <Vega/Debug/ShaderEditor.hpp>
+#include <Vega/Core/ConfigLoader.hpp>
 
 namespace Vega::Core {
-  class Application {
-    using EventCallback = std::function<void(const Event::Event &)>;
+  class Window;
+
+  class Application final {
+    friend class Callback;
 
   public:
-    explicit Application(const std::string &title = "Vega",
-                         unsigned int width = 1280,
-                         unsigned int height = 720,
-                         unsigned int antialiasing = 0);
+    explicit Application(int width, int height, Window *window);
 
-    virtual ~Application();
+    virtual ~Application() = default;
 
+  public:
     void Run();
 
-    virtual void OnUpdate() {}
-    virtual void OnDraw() const {}
-    virtual void OnEvent(const Event::Event &event);
-    virtual void OnGui() {}
-
-    [[nodiscard]] inline glm::ivec2 WindowSize() const { return mWindowSize; }
-    [[nodiscard]] inline glm::fvec2 MouseScroll() const { return mMouseScoll; }
-    [[nodiscard]] inline glm::fvec2 MousePosition() const { return mMousePosition; }
-
-    [[nodiscard]] bool KeyPressed(const Event::Event &event, unsigned int key) const;
-    [[nodiscard]] bool KeyHeld(const Event::Event &event, unsigned int key) const;
-    [[nodiscard]] bool KeyReleased(const Event::Event &event, unsigned int key) const;
-
-    [[nodiscard]] bool MousePressed(const Event::Event &event, unsigned int key) const;
-    [[nodiscard]] bool MouseHeld(const Event::Event &event, unsigned int key) const;
-    [[nodiscard]] bool MouseReleased(const Event::Event &event, unsigned int key) const;
+  public:
+    inline void WindowSize(const glm::ivec2 &size) { mWindowSize = size; }
+    inline void MousePosition(const glm::fvec2 &position) { mMousePosition = position; }
+    inline void MouseScroll(const glm::fvec2 &scroll) { mMouseScoll = scroll; }
 
   private:
-    bool OnWindowClose(const Event::Event &event);
-    bool OnWindowResize(const Event::Event &event);
-
-    bool OnMousePosition(const Event::Event &event);
-    bool OnMouseScroll(const Event::Event &event);
-
-  private:
-    GLFWwindow *mWindow = nullptr;
-
-    EventCallback mEventCallback;
+    Window *mWindow;
 
     bool mRunning = true;
 
     glm::ivec2 mWindowSize;
-    glm::fvec2 mMouseScoll{};
     glm::fvec2 mMousePosition{};
+    glm::fvec2 mMouseScoll{};
 
-    unsigned int mMaxFPS = 60;
+    unsigned int mMaxFramesPerSecond = 60;
+    unsigned int mMaxUpdatesPerSecond = 1;
 
-    double mFPSLimit = 1.0 / mMaxFPS;
+    double mFPSLimit = 1.0f / mMaxFramesPerSecond;
+    double mUPSLimit = 1.0f / mMaxUpdatesPerSecond;
+
+    ConfigLoader mConfigLoader;
   };
-
-  Application *Make();
 }

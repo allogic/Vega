@@ -38,12 +38,17 @@ set(INJECT_DEBUG_POSTFIX)
 
 add_subdirectory(${ASSIMP_DIR})
 
+# YAML
+set(YAML_DIR ${VENDOR_DIR}/YAML)
+
+add_subdirectory(${YAML_DIR})
+
 # VEGA
 file(GLOB_RECURSE VEGA_HEADER ${SOURCE_DIR}/*.hpp)
 file(GLOB_RECURSE VEGA_SOURCE ${SOURCE_DIR}/*.cpp)
 
-add_library(${PROJECT_NAME}
-        ${SOURCE_DIR}/Vega.hpp
+add_executable(${PROJECT_NAME}
+        ${SOURCE_DIR}/Vega.cpp
         ${VEGA_SOURCE}
         ${VEGA_HEADER}
         ${IMGUI_SOURCE}
@@ -52,22 +57,17 @@ add_library(${PROJECT_NAME}
 
 target_compile_definitions(${PROJECT_NAME}
         PUBLIC VEGA_ENABLE_DEBUG                                # VEGA
-        PUBLIC VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"   # VEGA
-        PUBLIC VEGA_CPP_COMPILER="/usr/bin/gcc"                 # VEGA
         )
 
 target_compile_definitions(${PROJECT_NAME}
         PRIVATE IMGUI_IMPL_OPENGL_LOADER_GLAD                   # IMGUI
         PRIVATE GLM_ENABLE_EXPERIMENTAL                         # GLM
-        PRIVATE VEGA_ENABLE_DEBUG                               # VEGA
-        PRIVATE VEGA_ROOT_PATH="/home/michael/Downloads/Vega/"  # VEGA
-        PRIVATE VEGA_CPP_COMPILER="/usr/bin/gcc"                # VEGA
         )
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${OPENGL_INCLUDE_DIR}                            # OPENGL
         PUBLIC ${GLAD_INCLUDE_DIR}                              # GLAD
-        PUBLIC ${GLFW_DIR}
+        PUBLIC ${GLFW_DIR}                                      # GLFW
         PUBLIC ${IMGUI_DIR}                                     # IMGUI
         PUBLIC ${GLM_DIR}                                       # GLM
         PUBLIC ${ASSIMP_DIR}/include                            # ASSIMP
@@ -78,5 +78,6 @@ target_link_libraries(${PROJECT_NAME}
         ${CMAKE_DL_LIBS}                                        # DLLIB
         glfw                                                    # GLFW
         assimp                                                  # ASSIMP
+        yaml-cpp
         stdc++fs                                                # STD (filesystem experimental)
         )

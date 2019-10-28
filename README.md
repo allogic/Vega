@@ -2,11 +2,11 @@
 
 Lightweight OpenGL graphics template middleware for games and data visualization. It aims to provide the thinnest and simplest stack of technology for prototyping directly from c++. 
 
+![Vega](logo.png)
+
 As a collection of game programming building blocks, vega aims to foster an ecosystem of simple minimal reusable components suited for building your own games.
 
 Vega is under heavy development, not yet stable, fully documented or production ready.
-
-![Vega](Logo.png)
 
 ## Getting started
 Clion is recommended!

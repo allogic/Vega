@@ -1,9 +1,10 @@
 #include <Vega/Core/SharedObject.hpp>
 
-Vega::Core::SharedObject::SharedObject(fs::path input, fs::path output) :
+Vega::Core::SharedObject::SharedObject(std::experimental::filesystem::path input,
+                                       std::experimental::filesystem::path output) :
     mInput(input),
     mOutput(output),
-    mLastWriteTime(fs::last_write_time(input)) {
+    mLastWriteTime(std::experimental::filesystem::last_write_time(input)) {
   Load();
 }
 
@@ -20,8 +21,8 @@ void Vega::Core::SharedObject::Unload() {
 }
 
 void Vega::Core::SharedObject::DebugReloadIfChanged() {
-  auto currWriteTime = fs::last_write_time(mInput);
-
+  auto currWriteTime = std::experimental::filesystem::last_write_time(mInput);
+  std::cout << "reloaded" << std::endl;
   if (mLastWriteTime >= currWriteTime) return;
 
   mLastWriteTime = currWriteTime;
@@ -32,8 +33,8 @@ void Vega::Core::SharedObject::DebugReloadIfChanged() {
 }
 
 bool Vega::Core::SharedObject::Compile() {
-  const std::string cmd = Filesystem::CppCompiler + " -shared -fPIC -I" +
-                          Filesystem::RootPath + "Vega/Source/ " +
+  /*const std::string cmd = Utility::Io::CppCompiler + " -shared -fPIC -I" +
+                          Utility::Io::VegaSourcePath + "Vega/Source/ " +
                           mInput.string() + " -o " + mOutput.string();
 
   VEGA_INFO("Compiling module %s: %s", mInput.filename().c_str(), cmd.c_str())
@@ -44,7 +45,8 @@ bool Vega::Core::SharedObject::Compile() {
 
   VEGA_INFO("Compiling module %s: %d", mInput.filename().c_str(), result)
 
-  return result == 0;
+  return result == 0;*/
+  return true;
 }
 
 void Vega::Core::SharedObject::Bind() {
@@ -57,7 +59,7 @@ void Vega::Core::SharedObject::Bind() {
 
   dlerror(); // Reset errors
 
-  mCreate = reinterpret_cast<create_t *>(dlsym(mDlHandle, "Create"));
+  mCreate = reinterpret_cast<CreateModule *>(dlsym(mDlHandle, "Create"));
   error = dlerror();
 
   if (error) {
