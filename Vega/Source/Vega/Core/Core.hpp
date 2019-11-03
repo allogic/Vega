@@ -2,8 +2,8 @@
 
 #ifdef VEGA_ENABLE_DEBUG
 
-#define VEGA_INFO(FMT, ...) std::fprintf(stdout, "[LINE:%d] [FILE:%s] " FMT "\n", __LINE__, __FILE__, __VA_ARGS__);
-#define VEGA_ERROR(FMT, ...) std::fprintf(stderr, "[LINE:%d] [FILE:%s] " FMT "\n", __LINE__, __FILE__, __VA_ARGS__);
+#define VEGA_INFO(FMT, ...) std::cout << boost::format("[%s:%d] " FMT "\n") % __FILE__ % __LINE__ % __VA_ARGS__;
+#define VEGA_ERROR(FMT, ...) std::cerr << boost::format("[%s:%d] " FMT "\n") % __FILE__ % __LINE__ % __VA_ARGS__;
 
 #define VEGA_MEASURE_BEGIN(NAME) auto NAME##_measure = std::chrono::high_resolution_clock::now();
 #define VEGA_MEASURE_END(NAME, TYPE) VEGA_INFO("[%d]", std::chrono::duration_cast<std::chrono::TYPE>(NAME##_measure - std::chrono::high_resolution_clock::now()).count());

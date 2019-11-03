@@ -1,4 +1,4 @@
-#include <iostream>
+#include <Vega/Std.hpp>
 
 #include <Vega/Core/Module.hpp>
 

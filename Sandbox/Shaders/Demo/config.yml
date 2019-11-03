@@ -1,7 +1,8 @@
-name: Demo
 type: shader
+
+name: Demo
 output-path: /home/michael/Downloads/Vega/Sandbox/Shaders/Demo
 
-files:
+watch-list:
   - Demo.vert
   - Demo.frag

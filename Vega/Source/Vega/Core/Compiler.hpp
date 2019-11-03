@@ -9,18 +9,14 @@
 #include <Vega/Utility/Io.hpp>
 
 namespace Vega::Core {
-  namespace fs = std::experimental::filesystem;
-
   class Compiler final {
   public:
-    static bool CompilePlugin(const std::string &name,
-                              const std::vector<fs::path> &files,
-                              const std::string &outputFile,
-                              bool verbose = false);
+    static bool Cpp(const boost::filesystem::path &input,
+                    const boost::filesystem::path &output,
+                    bool verbose);
 
-    static bool CompileShader(const std::string &name,
-                              const std::vector<fs::path> &files,
-                              const std::string &outputFile,
-                              bool verbose = false);
+    static bool Glsl(const std::vector<boost::filesystem::path> &files,
+                     const boost::filesystem::path &outputFile,
+                     bool verbose = false);
   };
 }

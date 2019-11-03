@@ -5,9 +5,7 @@
 #include <Vega/Core/Core.hpp>
 
 namespace Vega::Utility::Io {
-  namespace fs = std::experimental::filesystem;
-
-  static bool Read(std::string &data, const fs::path &file) {
+  static bool Read(std::string &data, const boost::filesystem::path &file) {
     std::ifstream stream(file, std::ios_base::in);
 
     std::stringstream ss;
@@ -19,7 +17,7 @@ namespace Vega::Utility::Io {
       return false;
     }
 
-    while (getline(stream, line))
+    while (std::getline(stream, line))
       ss << line << '\n';
 
     stream.close();
@@ -29,7 +27,7 @@ namespace Vega::Utility::Io {
     return true;
   }
 
-  static bool Write(const std::string &data, const fs::path &file) {
+  static bool Write(const std::string &data, const boost::filesystem::path &file) {
     std::ofstream stream(file, std::ios_base::out);
 
     if (!stream.good()) {

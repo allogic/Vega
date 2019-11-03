@@ -1,6 +1,13 @@
 set(SOURCE_DIR ${VEGA_DIR}/Source)
 set(VENDOR_DIR ${VEGA_DIR}/Vendor)
 
+# BOOST
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+
+find_package(Boost 1.67 REQUIRED COMPONENTS filesystem)
+
 # GLM
 set(GLM_DIR ${VENDOR_DIR}/GLM)
 
@@ -75,9 +82,9 @@ target_include_directories(${PROJECT_NAME}
         )
 
 target_link_libraries(${PROJECT_NAME}
-        ${CMAKE_DL_LIBS}                                        # DLLIB
-        glfw                                                    # GLFW
-        assimp                                                  # ASSIMP
-        yaml-cpp
-        stdc++fs                                                # STD (filesystem experimental)
+        PUBLIC ${CMAKE_DL_LIBS}                                 # DLLIB
+        PUBLIC glfw                                             # GLFW
+        PUBLIC assimp                                           # ASSIMP
+        PUBLIC yaml-cpp                                         # YAML
+        PUBLIC Boost::filesystem                                # BOOST
         )

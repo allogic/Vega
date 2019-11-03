@@ -16,7 +16,7 @@ namespace Vega::Core {
       ImGui::StyleColorsDark();
 
       ImGui_ImplGlfw_InitForOpenGL(mWindow->mWindow, true);
-      ImGui_ImplOpenGL3_Init(CONFIG_GET(std::string, "glsl-version").c_str());
+      ImGui_ImplOpenGL3_Init(std::string{"#version " + CONFIG_GET(std::string, "glsl-version")}.c_str());
 
       ImGuiIO &io = ImGui::GetIO();
       io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;

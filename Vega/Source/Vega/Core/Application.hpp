@@ -7,7 +7,7 @@
 #include <Vega/Vendor/Glm.hpp>
 
 #include <Vega/Core/Core.hpp>
-#include <Vega/Core/ConfigLoader.hpp>
+#include <Vega/Core/Loader/ConfigLoader.hpp>
 
 namespace Vega::Core {
   class Window;
@@ -43,6 +43,6 @@ namespace Vega::Core {
     double mFPSLimit = 1.0f / mMaxFramesPerSecond;
     double mUPSLimit = 1.0f / mMaxUpdatesPerSecond;
 
-    ConfigLoader mConfigLoader;
+    Loader::ConfigLoader mConfigLoader;
   };
 }

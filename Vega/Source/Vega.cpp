@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
   CONFIG_SET("sketch-path", Parser::Match(args, "", "--sketch-path", "-sp"))
   CONFIG_SET("gl-major", std::stoi(Parser::Match(args, "4", "--gl-major", "-gma")));
   CONFIG_SET("gl-minor", std::stoi(Parser::Match(args, "3", "--gl-minor", "-gmi")));
-  CONFIG_SET("glsl-version", std::string{"#version " + Parser::Match(args, "430", "--glsl-version", "-gv")});
+  CONFIG_SET("glsl-version", Parser::Match(args, "430", "--glsl-version", "-gv"));
   CONFIG_SET("title", Parser::Match(args, "Vega", "--title", "-t"));
   CONFIG_SET("antialiasing", std::stoi(Parser::Match(args, "0", "--antialiasing", "-aa")));
   CONFIG_SET("cpp-compiler", Parser::Match(args, "", "--cpp-compiler", "-cmp"));
