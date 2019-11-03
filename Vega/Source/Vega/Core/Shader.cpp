@@ -1,10 +1,10 @@
 #include <Vega/Core/Shader.hpp>
 
-Vega::Core::Shader::Shader(fs::path vertex, fs::path fragment) :
+/*Vega::Core::Shader::Shader(std::experimental::filesystem::path vertex, std::experimental::filesystem::path fragment) :
     mVertex(vertex),
     mFragment(fragment),
-    mLastWriteTimeVertex(fs::last_write_time(vertex)),
-    mLastWriteTimeFragment(fs::last_write_time(fragment)) {
+    mLastWriteTimeVertex(std::experimental::filesystem::last_write_time(vertex)),
+    mLastWriteTimeFragment(std::experimental::filesystem::last_write_time(fragment)) {
   Load();
 }
 
@@ -37,10 +37,11 @@ void Vega::Core::Shader::Unload() {
 }
 
 void Vega::Core::Shader::DebugReloadIfChanged() {
-  auto currentWriteTimeVertex = fs::last_write_time(mVertex);
-  auto currentWriteTimeFragment = fs::last_write_time(mFragment);
+  auto currentWriteTimeVertex = std::experimental::filesystem::last_write_time(mVertex);
+  auto currentWriteTimeFragment = std::experimental::filesystem::last_write_time(mFragment);
 
-  if (mLastWriteTimeVertex >= currentWriteTimeVertex && mLastWriteTimeFragment >= currentWriteTimeFragment) return;
+  if (mLastWriteTimeVertex >= currentWriteTimeVertex && mLastWriteTimeFragment >= currentWriteTimeFragment)
+    return;
 
   mLastWriteTimeVertex = currentWriteTimeVertex;
   mLastWriteTimeFragment = currentWriteTimeFragment;
@@ -51,10 +52,10 @@ void Vega::Core::Shader::DebugReloadIfChanged() {
 
 void Vega::Core::Shader::Compile() {
   std::string vertexSource;
-  Filesystem::Read(vertexSource, mVertex);
+  Utility::Io::Read(vertexSource, mVertex);
 
   std::string fragmentSource;
-  Filesystem::Read(fragmentSource, mFragment);
+  Utility::Io::Read(fragmentSource, mFragment);
 
   std::string shaderError;
 
@@ -90,5 +91,4 @@ bool Vega::Core::Shader::CompileShader(unsigned int sid, const std::string &shad
   }
 
   return true;
-}
-
+}*/

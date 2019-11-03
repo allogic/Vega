@@ -1,5 +1,3 @@
-#pragma once
-
 // cmake todos
 // TODO create public/private include interfaces
 
@@ -16,12 +14,15 @@
 // TODO convert singleton with member ref variables
 // TODO implement GLFW event callbacks
 
+#pragma once
+
+#include <Vega/Std.hpp>
+
+#include <Vega/Core/Core.hpp>
+#include <Vega/Core/Window.hpp>
+#include <Vega/Core/Gui.hpp>
 #include <Vega/Core/Application.hpp>
+#include <Vega/Core/Callback.hpp>
 
-int main(int argc, char **argv) {
-  auto app = Vega::Core::Make();
-
-  app->Run();
-
-  delete app;
-}
+#include <Vega/Utility/Settings.hpp>
+#include <Vega/Utility/Parser.hpp>

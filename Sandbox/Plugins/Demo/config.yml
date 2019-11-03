@@ -1,0 +1,10 @@
+type: plugin
+
+name: Demo
+output-path: /home/michael/Downloads/Vega/Sandbox/Plugins/Demo
+
+main: Demo.cpp
+
+watch-list:
+  - Demo.cpp
+  - Test.hpp

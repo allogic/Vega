@@ -1,7 +1,9 @@
 #pragma once
 
 #include <Vega/Std.hpp>
-#include <Vega/Vendor.hpp>
+
+#include <Vega/Vendor/Glad.hpp>
+#include <Vega/Vendor/Glm.hpp>
 
 #include <Vega/Tmp/Vertex.hpp>
 

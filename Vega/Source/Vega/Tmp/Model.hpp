@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Vega/Vendor.hpp>
+#include <Vega/Vendor/Assimp.hpp>
 
 #include <Vega/Tmp/Mesh.hpp>
 
