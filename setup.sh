@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-vendor=$(pwd)/Vega/Vendor
+Vendor=$(pwd)/Vega/Vendor
 
 rm -rf "$vendor"
 mkdir -p "$vendor"

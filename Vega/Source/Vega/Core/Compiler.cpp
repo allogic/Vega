@@ -1,3 +1,5 @@
+#include <Vega/Std.hpp>
+
 #include <Vega/Core/Compiler.hpp>
 
 #include <Vega/Vendor/Glad.hpp>
@@ -42,7 +44,7 @@ bool Vega::Core::Compiler::Glsl(const std::vector<boost::filesystem::path> &file
     //if (file.extension() == ".vert") ss << "#vertex\n";
     //else if (file.extension() == ".frag") ss << "#fragment\n";
 
-    std::ifstream stream(file, std::ios_base::in);
+    std::ifstream stream(file.string(), std::ios_base::in);
 
     if (!stream.good()) {
       stream.close();
@@ -69,9 +71,11 @@ bool Vega::Core::Compiler::Glsl(const std::vector<boost::filesystem::path> &file
     glGetShaderiv(sid, GL_INFO_LOG_LENGTH, &size);
 
     if (verbose && size > 0) {
-      char msg[size];
+      std::string msg;
 
-      glGetShaderInfoLog(sid, size, nullptr, msg);
+      msg.reserve(size);
+
+      glGetShaderInfoLog(sid, size, nullptr, &msg[0]);
 
       std::cerr << msg;
 

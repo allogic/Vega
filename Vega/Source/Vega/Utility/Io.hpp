@@ -6,7 +6,7 @@
 
 namespace Vega::Utility::Io {
   static bool Read(std::string &data, const boost::filesystem::path &file) {
-    std::ifstream stream(file, std::ios_base::in);
+    std::ifstream stream(file.string(), std::ios_base::in);
 
     std::stringstream ss;
     std::string line;
@@ -28,7 +28,7 @@ namespace Vega::Utility::Io {
   }
 
   static bool Write(const std::string &data, const boost::filesystem::path &file) {
-    std::ofstream stream(file, std::ios_base::out);
+    std::ofstream stream(file.string(), std::ios_base::out);
 
     if (!stream.good()) {
       stream.close();

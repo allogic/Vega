@@ -2,7 +2,7 @@
 
 Vega::Core::Config::Config(const boost::filesystem::path &file) :
     mFile({file, boost::filesystem::last_write_time(file)}) {
-  const YAML::Node config = YAML::LoadFile(file.c_str());
+  const YAML::Node config = YAML::LoadFile(file.string().c_str());
 
   if (!Validate(config)) return;
 
