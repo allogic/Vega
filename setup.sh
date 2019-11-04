@@ -1,15 +1,27 @@
 #!/usr/bin/env bash
 
-Vendor=$(pwd)/Vega/Vendor
+vendor=$(pwd)/Vega/Vendor
 
-rm -rf "$vendor"
-mkdir -p "$vendor"
+# BOOST
+#if [ -d "/tmp/boost" ]; then
+#  rm -rf "/tmp/boost"
+#fi
 
-git clone --single-branch --branch master https://github.com/Dav1dde/glad "$vendor/GLAD"      # GLAD
-git clone --single-branch --branch master https://github.com/glfw/glfw "$vendor/GLFW"         # GLFW
-git clone --single-branch --branch master https://github.com/g-truc/glm "$vendor/GLM"         # GLM
-git clone --single-branch --branch docking https://github.com/ocornut/imgui "$vendor/IMGUI"   # IMGUI (dockable experimental)
-git clone --single-branch --branch master https://github.com/assimp/assimp "$vendor/ASSIMP"   # ASSIMP
-git clone --single-branch --branch master https://github.com/jbeder/yaml-cpp "$vendor/YAML"   # YAML
+#mkdir "/tmp/boost" && cd "/tmp/boost" || exit
 
-cd "$vendor/GLAD" && python -m glad --generator=c --out-path=gl                               # GLAD (downloading remote files)
+#git clone --single-branch --branch master --recursive https://github.com/boostorg/build .
+#./bootstrap.sh
+#./b2 --build-dir=. --toolset=gcc --build-type=complete stage
+
+# VENDOR
+
+rm -rf "$vendor" && mkdir -p "$vendor" && cd "$vendor" || exit
+
+git clone --single-branch --branch master https://github.com/Dav1dde/glad
+git clone --single-branch --branch master https://github.com/glfw/glfw
+git clone --single-branch --branch master https://github.com/g-truc/glm
+git clone --single-branch --branch docking https://github.com/ocornut/imgui
+git clone --single-branch --branch master https://github.com/assimp/assimp
+git clone --single-branch --branch master https://github.com/jbeder/yaml-cpp yaml
+
+cd "$vendor/glad" && python -m glad --generator=c --out-path=gl

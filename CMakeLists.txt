@@ -7,7 +7,7 @@ enable_language(CXX)
 # SETTINGS
 set(CMAKE_CXX_STANDARD 17)
 
-set(VENDOR_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Vendor)
+set(VENDOR_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Vega/Vendor)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Vega/Source)
 
 # BOOST
@@ -15,7 +15,7 @@ set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 
-find_package(Boost 1.71.0 REQUIRED COMPONENTS filesystem)
+find_package(Boost 1.67.0 REQUIRED COMPONENTS filesystem)
 
 # GLM
 set(GLM_DIR ${VENDOR_DIR}/glm)
@@ -80,12 +80,11 @@ target_compile_definitions(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${OPENGL_INCLUDE_DIR}                            # OPENGL
         PUBLIC ${GLAD_INCLUDE_DIR}                              # GLAD
-        PUBLIC ${GLFW_DIR}                                      # GLFW
+        PUBLIC ${GLFW_DIR}/include                              # GLFW
         PUBLIC ${IMGUI_DIR}                                     # IMGUI
         PUBLIC ${GLM_DIR}                                       # GLM
         PUBLIC ${ASSIMP_DIR}/include                            # ASSIMP
         PUBLIC ${SOURCE_DIR}                                    # VEGA
-        PUBLIC ${Boost_INCLUDE_DIR}                             # BOOST
         )
 
 target_link_libraries(${PROJECT_NAME}
@@ -93,6 +92,5 @@ target_link_libraries(${PROJECT_NAME}
         PUBLIC glfw                                             # GLFW
         PUBLIC assimp                                           # ASSIMP
         PUBLIC yaml-cpp                                         # YAML
-        PUBLIC ${Boost_LIBRARIES}                               # BOOST
-        PUBLIC Boost::filesystem
+        PUBLIC Boost::filesystem                                # BOOST
         )

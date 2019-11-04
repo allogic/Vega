@@ -6,7 +6,7 @@ if (test-path "$programFiles/Boost") {
     remove-item -Recurse -Force "$programFiles/Boost"
     new-item -ItemType 'directory' -Path "$programFiles/Boost"
     push-location -Path "$programFiles/Boost"
-    git clone --single-branch --branch develop --recursive https://github.com/boostorg/build .
+    git clone --single-branch --branch master --recursive https://github.com/boostorg/build .
     ./bootstrap.bat
     #./b2 --prefix="$programFiles/Boost/build" install
     #./b2 --toolset=msvc --build-type=complete --architecture=x86 --address-model=32 stage #--with-headers --with-filesystem
