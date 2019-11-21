@@ -25,8 +25,8 @@ namespace YAML {
 
       std::string value = node.as<std::string>();
 
-      if (value == "plugin") type.Type = Vega::Core::ConfigIdentifier::Plugin;
-      else if (value == "shader") type.Type = Vega::Core::ConfigIdentifier::Shader;
+      if (value == "Plugin") type.Type = Vega::Core::ConfigIdentifier::Plugin;
+      else if (value == "Shader") type.Type = Vega::Core::ConfigIdentifier::Shader;
       else type.Type = Vega::Core::ConfigIdentifier::None;
 
       return true;

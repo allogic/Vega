@@ -18,14 +18,12 @@
 #include <Utility/Settings.hpp>
 
 namespace Vega::Core::Window {
-  static inline GLFWwindow *sWindow = nullptr;
-
-  static bool Create() {
+  static GLFWwindow *Init() {
     auto &settings = Vega::Utility::Settings::Instance();
 
     if (!glfwInit()) {
       VEGA_ERROR("Failed to initialize glfw")
-      return false;
+      return nullptr;
     }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, settings.Get<int>("gl-major"));
@@ -38,25 +36,25 @@ namespace Vega::Core::Window {
     int height = settings.Get<int>("height");
     std::string title = settings.Get<std::string>("title");
 
-    sWindow = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
 
-    if (!sWindow) {
+    if (!window) {
       VEGA_ERROR("Failed to create window")
-      return false;
+      return nullptr;
     }
 
-    glfwMakeContextCurrent(sWindow);
+    glfwMakeContextCurrent(window);
 
     if (!gladLoadGL()) {
       VEGA_ERROR("Failed to initialize glad")
-      return false;
+      return nullptr;
     }
 
-    return true;
+    return window;
   }
 
-  static void Destroy() {
-    glfwDestroyWindow(sWindow);
+  static void Destroy(GLFWwindow *window) {
+    glfwDestroyWindow(window);
     glfwTerminate();
   }
 }

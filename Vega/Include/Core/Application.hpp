@@ -16,24 +16,42 @@
 #include <Core/Core.hpp>
 #include <Core/Loader/ConfigLoader.hpp>
 
+#include <Event/Event.hpp>
+#include <Event/WindowEvent.hpp>
+#include <Event/MouseEvent.hpp>
+#include <Event/KeyEvent.hpp>
+
 namespace Vega::Core {
   class Application final {
-    friend class Callback;
+    using EventCallback = void (Application::*)(const Event::Event &event);
 
   public:
-    explicit Application() = default;
-
-    virtual ~Application() = default;
+    explicit Application(GLFWwindow *window);
 
   public:
     void Run();
 
   public:
-    inline void WindowSize(const glm::ivec2 &size) { mWindowSize = size; }
-    inline void MousePosition(const glm::fvec2 &position) { mMousePosition = position; }
-    inline void MouseScroll(const glm::fvec2 &scroll) { mMouseScoll = scroll; }
+    bool KeyPressed(const Event::Event &event, unsigned int key) const;
+    bool KeyHeld(const Event::Event &event, unsigned int key) const;
+    bool KeyReleased(const Event::Event &event, unsigned int key) const;
+
+    bool MousePressed(const Event::Event &event, unsigned int key) const;
+    bool MouseHeld(const Event::Event &event, unsigned int key) const;
+    bool MouseReleased(const Event::Event &event, unsigned int key) const;
 
   private:
+    void OnEvent(const Event::Event &event);
+
+  private:
+    bool OnWindowClose(const Event::Event &event) const;
+    bool OnWindowResize(const Event::Event &event) const;
+    bool OnMousePosition(const Event::Event &event) const;
+    bool OnMouseScroll(const Event::Event &event) const;
+
+  private:
+    EventCallback mCallback;
+
     bool mRunning = true;
 
     glm::ivec2 mWindowSize{};
